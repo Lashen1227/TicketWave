@@ -1,0 +1,4 @@
+Url : http://localhost:8080/swagger-ui/index.html
+
+
+@OpenAPIDefinition(info = @Info(title = "Event Ticketing System", version = "1.0", description = "Event Ticketing System API"))
