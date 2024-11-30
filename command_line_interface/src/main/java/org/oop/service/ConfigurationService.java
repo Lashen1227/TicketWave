@@ -138,28 +138,48 @@ public class ConfigurationService {
         return configurations.toString();
     }
 
-    // Helper method to get integer input
+    // Helper method to get integer input (positive integer only)
     private int getIntInput(Scanner scanner, String prompt) {
         while (true) {
             try {
                 System.out.print(prompt);
-                return scanner.nextInt();
+                String input = scanner.nextLine();
+
+                if (input.trim().isEmpty() || !input.matches("\\d+")) {
+                    System.out.println("Input must be a positive integer. Please try again.");
+                } else {
+                    int value = Integer.parseInt(input);
+                    if (value <= 0) {
+                        System.out.println("Value must be greater than zero. Please try again.");
+                    } else {
+                        return value;
+                    }
+                }
             } catch (Exception e) {
-                System.out.println("Invalid input. Please enter an integer.");
-                scanner.nextLine(); // Clear invalid input
+                System.out.println("Invalid input. Please enter a valid positive integer.");
             }
         }
     }
 
-    // Helper method to get float input
+    // Helper method to get float input (positive float only)
     private float getFloatInput(Scanner scanner, String prompt) {
         while (true) {
             try {
                 System.out.print(prompt);
-                return scanner.nextFloat();
+                String input = scanner.nextLine();
+
+                if (input.trim().isEmpty() || !input.matches("\\d+(\\.\\d+)?")) {
+                    System.out.println("Input must be a positive number. Please try again.");
+                } else {
+                    float value = Float.parseFloat(input);
+                    if (value <= 0) {
+                        System.out.println("Value must be greater than zero. Please try again.");
+                    } else {
+                        return value;
+                    }
+                }
             } catch (Exception e) {
-                System.out.println("Invalid input. Please enter a number.");
-                scanner.nextLine(); // Clear invalid input
+                System.out.println("Invalid input. Please enter a valid positive number.");
             }
         }
     }

@@ -71,12 +71,24 @@ public class ConfigCLI {
     private int getValidatedChoice() {
         while (true) {
             try {
-                int choice = scanner.nextInt();
-                scanner.nextLine();
+                String input = scanner.nextLine();
+                int choice = Integer.parseInt(input);
+
+                // Check if the input is non-negative
+                if (choice < 0) {
+                    System.out.println("Negative numbers are not allowed. Please try again.");
+                    continue;
+                }
+
+                // Check if the input is an integer and not a float
+                if (input.contains(".")) {
+                    System.out.println("Floating-point numbers are not allowed. Please try again.");
+                    continue;
+                }
+
                 return choice;
-            } catch (Exception e) {
-                System.out.println("Integer required. Please try again.");
-                scanner.nextLine();
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input. Please enter a valid integer.");
             }
         }
     }
