@@ -1,18 +1,17 @@
 package org.oop.service;
 
-import org.oop.config.DatabaseConfig;
-import org.oop.model.Configuration;
+import org.oop.config.*;
+import org.oop.model.*;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.Scanner;
 
 /**
  * Service class to handle Configuration-related operations.
  */
 public class ConfigurationService {
+
+    // Save a new configuration to the database
     public boolean saveConfiguration(Configuration config) {
         String query = "INSERT INTO configuration (total_tickets, ticket_release_rate, customer_retrieval_rate, max_ticket_capacity) VALUES (?, ?, ?, ?)";
 
@@ -32,7 +31,7 @@ public class ConfigurationService {
         }
     }
 
-    // Retrieve Configuration from the database
+    // Retrieve a configuration from the database by ID
     public Configuration getConfiguration(int id) {
         String query = "SELECT * FROM configuration WHERE id = ?";
         Configuration config = null;
@@ -60,7 +59,7 @@ public class ConfigurationService {
         return config;
     }
 
-    // Update Configuration in the database
+    // Update an existing configuration in the database
     public boolean updateConfiguration(Configuration config) {
         String query = "UPDATE configuration SET total_tickets = ?, ticket_release_rate = ?, customer_retrieval_rate = ?, max_ticket_capacity = ? WHERE id = ?";
 
@@ -81,7 +80,7 @@ public class ConfigurationService {
         }
     }
 
-    // Delete Configuration from the database
+    // Delete a configuration from the database by ID
     public boolean deleteConfiguration(int id) {
         String query = "DELETE FROM configuration WHERE id = ?";
 
@@ -97,24 +96,14 @@ public class ConfigurationService {
         }
     }
 
+    // Add a configuration interactively via CLI
     public void addConfiguration(Scanner scanner) {
         System.out.println("\n** Add Configuration **");
 
-        System.out.print("Enter total tickets: ");
-        int totalTickets = scanner.nextInt();
-        scanner.nextLine(); // Consume newline
-
-        System.out.print("Enter ticket release rate: ");
-        float ticketReleaseRate = scanner.nextFloat();
-        scanner.nextLine(); // Consume newline
-
-        System.out.print("Enter customer retrieval rate: ");
-        float customerRetrievalRate = scanner.nextFloat();
-        scanner.nextLine(); // Consume newline
-
-        System.out.print("Enter max ticket capacity: ");
-        int maxTicketCapacity = scanner.nextInt();
-        scanner.nextLine(); // Consume newline
+        int totalTickets = getIntInput(scanner, "Enter total tickets: ");
+        float ticketReleaseRate = getFloatInput(scanner, "Enter ticket release rate: ");
+        float customerRetrievalRate = getFloatInput(scanner, "Enter customer retrieval rate: ");
+        int maxTicketCapacity = getIntInput(scanner, "Enter max ticket capacity: ");
 
         Configuration config = new Configuration(totalTickets, ticketReleaseRate, customerRetrievalRate, maxTicketCapacity);
 
@@ -125,6 +114,7 @@ public class ConfigurationService {
         }
     }
 
+    // Get all configurations as a string
     public String getAllConfigurations() {
         String query = "SELECT * FROM configuration";
         StringBuilder configurations = new StringBuilder();
@@ -134,11 +124,11 @@ public class ConfigurationService {
              ResultSet resultSet = preparedStatement.executeQuery()) {
 
             while (resultSet.next()) {
-                configurations.append("ID: ").append(resultSet.getInt("id")).append("\n");
-                configurations.append("Total Tickets: ").append(resultSet.getInt("total_tickets")).append("\n");
-                configurations.append("Ticket Release Rate: ").append(resultSet.getFloat("ticket_release_rate")).append("\n");
-                configurations.append("Customer Retrieval Rate: ").append(resultSet.getFloat("customer_retrieval_rate")).append("\n");
-                configurations.append("Max Ticket Capacity: ").append(resultSet.getInt("max_ticket_capacity")).append("\n\n");
+                configurations.append("ID: ").append(resultSet.getInt("id")).append("\n")
+                        .append("Total Tickets: ").append(resultSet.getInt("total_tickets")).append("\n")
+                        .append("Ticket Release Rate: ").append(resultSet.getFloat("ticket_release_rate")).append("\n")
+                        .append("Customer Retrieval Rate: ").append(resultSet.getFloat("customer_retrieval_rate")).append("\n")
+                        .append("Max Ticket Capacity: ").append(resultSet.getInt("max_ticket_capacity")).append("\n\n");
             }
 
         } catch (SQLException e) {
@@ -146,5 +136,31 @@ public class ConfigurationService {
         }
 
         return configurations.toString();
+    }
+
+    // Helper method to get integer input
+    private int getIntInput(Scanner scanner, String prompt) {
+        while (true) {
+            try {
+                System.out.print(prompt);
+                return scanner.nextInt();
+            } catch (Exception e) {
+                System.out.println("Invalid input. Please enter an integer.");
+                scanner.nextLine(); // Clear invalid input
+            }
+        }
+    }
+
+    // Helper method to get float input
+    private float getFloatInput(Scanner scanner, String prompt) {
+        while (true) {
+            try {
+                System.out.print(prompt);
+                return scanner.nextFloat();
+            } catch (Exception e) {
+                System.out.println("Invalid input. Please enter a number.");
+                scanner.nextLine(); // Clear invalid input
+            }
+        }
     }
 }
