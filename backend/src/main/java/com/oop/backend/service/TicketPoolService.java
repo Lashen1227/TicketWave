@@ -18,7 +18,6 @@ import static com.oop.backend.cli.ConfigCLI.logger;
 @Service
 public class TicketPoolService {
     private final Lock lock = new ReentrantLock();
-
     @Autowired
     private TicketPoolRepository ticketPoolRepository;
     @Autowired
@@ -35,7 +34,6 @@ public class TicketPoolService {
     public void removeTicket(Long eventItemId, Customer customer) {
         lock.lock();
         try {
-//            TicketPool ticketPool = getTicketPoolByEventItemId(eventItemId);
             TicketPool ticketPool = ticketPoolRepository.findByEventItemIdAndTicketsIsSoldFalse(eventItemId);
             if (ticketPool != null && ticketPool.getAvailableTickets() > 0) {
                 Ticket ticket = ticketPool.getTickets().stream().filter(Ticket::isAvailable).findFirst().orElse(null);
@@ -44,7 +42,6 @@ public class TicketPoolService {
                     ticket.setCustomer(customer);
                     ticketService.saveTicket(ticket);
                     logger.info(Green + customer.getName() + " - Ticket " + ticket.getId() + " purchased for " + ticketPool.getEventName() + Reset);
-//                    return true;
                 } else {
                     logger.info(Yellow + "No tickets available for the event: " + ticketPool.getEventName() + Reset);
                 }
@@ -52,7 +49,6 @@ public class TicketPoolService {
         } finally {
             lock.unlock();
         }
-//        return false;
     }
 
     public void addTicket(TicketPool ticketPool, Ticket ticket) {

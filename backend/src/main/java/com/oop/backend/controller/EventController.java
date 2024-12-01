@@ -23,11 +23,14 @@ import static com.oop.backend.cli.ConfigCLI.logger;
 public class EventController {
     @Autowired
     private EventService eventService;
+
     @Autowired
     private MappingService mappingService;
+
     @Autowired
     private VendorService vendorService;
 
+    // Create a new event
     @PostMapping
     public ResponseEntity<?> createEvent(@RequestBody EventItemDTO eventItemDTO) {
         try {
@@ -46,6 +49,7 @@ public class EventController {
         }
     }
 
+    // Get all events
     @GetMapping("/list")
     public ResponseEntity<List<EventItemDTO>> getAllEvents() {
         List<EventItemDTO> events = eventService.getAllEvents(false)
@@ -55,6 +59,7 @@ public class EventController {
         return new ResponseEntity<>(events, HttpStatus.OK);
     }
 
+    // Get all events by vendor
     @GetMapping("/{vendorId}/list")
     public ResponseEntity<List<EventItemDTO>> getVendorEvents(@PathVariable long vendorId) {
         List<EventItemDTO> events = eventService.getVendorEvents(vendorId)
@@ -62,5 +67,15 @@ public class EventController {
                 .map(mappingService::mapToEventItemDTO)
                 .collect(Collectors.toList());
         return new ResponseEntity<>(events, HttpStatus.OK);
+    }
+
+    // Get specific event by ID
+    @GetMapping("/{eventId}")
+    public ResponseEntity<EventItemDTO> getEventById(@PathVariable long eventId) {
+        EventItem eventItem = eventService.getEventById(eventId);
+        if (eventItem == null) {
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(mappingService.mapToEventItemDTO(eventItem), HttpStatus.OK);
     }
 }

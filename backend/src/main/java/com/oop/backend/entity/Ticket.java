@@ -4,25 +4,28 @@ import jakarta.persistence.*;
 
 @Entity
 public class Ticket {
+
+    @ManyToOne
+    private TicketPool ticketPool;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private boolean isSold = false;
-    private boolean isSimulated;
-
     @Version
     private Long version;
+
+    private boolean isSold = false;
+    private boolean isSimulated;
 
     @ManyToOne
     private EventItem eventItem; // Link to Event
     @ManyToOne
     private Customer customer; // Link to Customer
-    @ManyToOne
-    private TicketPool ticketPool;
 
     // Constructors, getters, and setters
-    public Ticket() {}
+    public Ticket() {
+    }
 
     public Ticket(EventItem eventItem) {
         this.eventItem = eventItem;
@@ -55,6 +58,7 @@ public class Ticket {
     public void sellTicket() {
         isSold = true;
     }
+
     public Long getVersion() {
         return version;
     }
@@ -69,6 +73,10 @@ public class Ticket {
 
     public EventItem getEventItem() {
         return this.eventItem;
+    }
+
+    public Object getTicketId() {
+        return this.id;
     }
 
     // ... getters and setters ...

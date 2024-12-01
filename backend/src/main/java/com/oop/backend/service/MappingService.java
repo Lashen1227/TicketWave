@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class MappingService {
+
     public TicketDTO mapToTicketDTO(Ticket ticket) {
         TicketDTO dto = new TicketDTO();
         dto.setId(ticket.getId());
@@ -40,11 +41,13 @@ public class MappingService {
         dto.setEventLocation(eventItem.getEventLocation());
         dto.setEventDate(eventItem.getEventDate());
         dto.setEventTime(eventItem.getEventTime());
+        dto.setEventId(eventItem.getEventId());
         dto.setTicketPrice(eventItem.getTicketPrice());
         dto.setDetails(eventItem.getDetails());
         dto.setImage(eventItem.getImage());
         dto.setVendorId(eventItem.getVendor().getId());
         dto.setVendorName(eventItem.getVendor().getName());
+        dto.setAvailableTickets(eventItem.getTicketPool().getAvailableTickets());
         return dto;
     }
 

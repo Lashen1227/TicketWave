@@ -11,6 +11,5 @@ import java.util.List;
 @Transactional
 public interface EventRepository extends JpaRepository<EventItem, Long> {
     List<EventItem> findByVendorId(Long vendorId);
-
     List<EventItem> findByisSimulated(boolean b);
 }

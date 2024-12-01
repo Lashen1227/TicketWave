@@ -24,8 +24,12 @@ public class UserService {
         return vendorRepository.findByEmail(email);
     }
 
+    public boolean emailExists(String email) {
+        return customerRepository.findByEmail(email) != null || vendorRepository.findByEmail(email) != null;
+    }
+
     public String generateSimpleToken(Long userId) {
-        // Simple token generation (not secure, just for demo purposes)
+        // Generate a simple token for the user
         return Base64.getEncoder().encodeToString((userId + ":" + System.currentTimeMillis()).getBytes());
     }
 }

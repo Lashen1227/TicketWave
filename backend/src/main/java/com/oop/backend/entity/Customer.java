@@ -1,9 +1,11 @@
 package com.oop.backend.entity;
 
+import com.oop.backend.dto.TicketDTO;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Entity
 @DiscriminatorValue("CUSTOMER")
@@ -13,9 +15,7 @@ public class Customer extends User {
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Ticket> tickets;
 
-    // Constructors, getters, and setters
-    public Customer() {
-    }
+    public Customer() {}
 
     public Customer(String name, String email, String password) {
         super(name, email, password);
@@ -34,5 +34,15 @@ public class Customer extends User {
         return this.ticketRetrievalRate;
     }
 
+    public List<TicketDTO> getTickets() {
+        return tickets.stream()
+                .map(ticket -> new TicketDTO(
+                        ticket.getEventItem().getName(),
+                        ticket.getTicketId().toString(),
+                        ticket.getEventItem().getImageUrl(),
+                        ticket.getEventItem().getDateTime(),
+                        ticket.getEventItem().getEventId().toString()))
+                .collect(Collectors.toList());
+    }
     // ... getters and setters ...
 }
