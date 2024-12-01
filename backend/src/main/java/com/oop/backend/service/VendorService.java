@@ -8,11 +8,12 @@ import com.oop.backend.repository.EventRepository;
 import com.oop.backend.repository.TicketPoolRepository;
 import com.oop.backend.repository.TicketRepository;
 import com.oop.backend.repository.VendorRepository;
-import jakarta.transaction.Transactional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -25,20 +26,25 @@ public class VendorService {
     @Autowired
     private VendorRepository vendorRepository;
     @Autowired
+    private EventRepository eventRepository;
+    @Autowired
     private TicketRepository ticketRepository;
     @Autowired
-    private EventRepository eventRepository;
+    private TicketPoolService ticketPoolService;
     @Autowired
     private TicketPoolRepository ticketPoolRepository;
     @Autowired
-    private TicketPoolService ticketPoolService;
+    private UserService userService;
 
     @Transactional
     public Vendor createVendor(Vendor vendor) {
+        if (userService.emailExists(vendor.getEmail())) {
+            throw new DataIntegrityViolationException("Email already exists");
+        }
         return vendorRepository.save(vendor);
     }
 
-    @org.springframework.transaction.annotation.Transactional
+    @Transactional
     public void releaseTickets(Vendor vendor, Long eventId) {
         EventItem eventItem = eventRepository.findById(eventId).orElse(null);
         boolean isSimulated = eventItem.isSimulated();

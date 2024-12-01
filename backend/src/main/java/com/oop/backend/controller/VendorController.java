@@ -6,6 +6,7 @@ import com.oop.backend.entity.Vendor;
 import com.oop.backend.service.MappingService;
 import com.oop.backend.service.VendorService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,13 +20,18 @@ import java.util.stream.Collectors;
 public class VendorController {
     @Autowired
     private VendorService vendorService;
+
     @Autowired
     private MappingService mappingService;
 
     @PostMapping
     public ResponseEntity<VendorDTO> createVendor(@RequestBody VendorDTO vendorDTO) {
-        Vendor vendor = new Vendor(vendorDTO.getName(), vendorDTO.getEmail(), vendorDTO.getPassword());
-        return new ResponseEntity<>(mappingService.mapToVendorDTO(vendorService.createVendor(vendor)), HttpStatus.CREATED);
+        try {
+            Vendor vendor = new Vendor(vendorDTO.getName(), vendorDTO.getEmail(), vendorDTO.getPassword());
+            return new ResponseEntity<>(mappingService.mapToVendorDTO(vendorService.createVendor(vendor)), HttpStatus.CREATED);
+        } catch (DataIntegrityViolationException e) {
+            return new ResponseEntity<>(null, HttpStatus.CONFLICT);
+        }
     }
 
     @GetMapping

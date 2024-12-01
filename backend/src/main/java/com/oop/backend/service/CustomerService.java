@@ -6,9 +6,11 @@ import com.oop.backend.entity.Ticket;
 import com.oop.backend.entity.TicketPool;
 import com.oop.backend.repository.CustomerRepository;
 import com.oop.backend.repository.EventRepository;
+import jakarta.transaction.Transactional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -29,9 +31,13 @@ public class CustomerService {
     @Autowired
     private TicketPoolService ticketPoolService;
     @Autowired
-    private TicketService ticketService;
+    private UserService userService;
 
+    @Transactional
     public Customer createCustomer(Customer customer) {
+        if (userService.emailExists(customer.getEmail())) {
+            throw new DataIntegrityViolationException("Email already exists");
+        }
         return customerRepository.save(customer);
     }
 

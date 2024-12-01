@@ -9,12 +9,16 @@ import java.util.Optional;
 
 @Service
 public class ConfigurationService {
-
     @Autowired
     private ConfigurationRepository configurationRepository;
 
-    public Configuration saveConfiguration(Configuration config) {
-        return configurationRepository.save(config);
+    public Configuration getConfiguration() {
+        Optional<Configuration> configuration = configurationRepository.findById(1L);
+        return configuration.orElse(null);
+    }
+
+    public Configuration saveConfiguration(Configuration configuration) {
+        return configurationRepository.save(configuration);
     }
 
     public Optional<Configuration> loadConfiguration() {

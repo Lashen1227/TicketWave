@@ -13,27 +13,18 @@ import static com.oop.backend.cli.ConfigCLI.logger;
 @Service
 public class EventService {
     @Autowired
-    private EventRepository eventRepository;
-    @Autowired
     private TicketPoolService ticketPoolService;
+    @Autowired
+    private EventRepository eventRepository;
 
     public EventItem getEventById(Long eventItemId) {
         return eventRepository.findById(eventItemId).orElse(null);
     }
 
-//    public EventItem createEvent(EventItem eventItem, int maxPoolSize) {
-//        EventItem savedEventItem = eventRepository.save(eventItem);
-//        TicketPool ticketPool = new TicketPool(maxPoolSize, savedEventItem);
-//        ticketPoolService.createTicketPool(ticketPool);
-//        savedEventItem.setTicketPool(ticketPool);
-//        return eventRepository.save(savedEventItem);
-//    }
-
     public EventItem createEvent(EventItem eventItem, int maxPoolSize) {
         // Save the EventItem FIRST
         EventItem savedEventItem = eventRepository.save(eventItem);
-
-        // Now, create and save the TicketPool
+        // Create and save the TicketPool
         TicketPool ticketPool = new TicketPool(maxPoolSize, savedEventItem);
         ticketPoolService.createTicketPool(ticketPool);
         savedEventItem.setTicketPool(ticketPool); // Assign the saved TicketPool to the EventItem
@@ -42,10 +33,7 @@ public class EventService {
     }
 
     public EventItem createEvent(EventItem eventItem) {
-        // Save the EventItem FIRST
         EventItem savedEventItem = eventRepository.save(eventItem);
-
-        // Now, create and save the TicketPool
         TicketPool ticketPool = new TicketPool(savedEventItem);
         ticketPoolService.createTicketPool(ticketPool);
         savedEventItem.setTicketPool(ticketPool); // Assign the saved TicketPool to the EventItem

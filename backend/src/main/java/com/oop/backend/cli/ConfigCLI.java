@@ -32,8 +32,6 @@ public class ConfigCLI {
     @Autowired
     private EventService eventService;
     @Autowired
-    private TicketService ticketService;
-    @Autowired
     private CustomerService customerService;
 
     private final Scanner scanner;
@@ -422,6 +420,7 @@ public class ConfigCLI {
         }
     }
 
+    // Helper method to start the simulation
     public void start() {
         runCLI();
     }

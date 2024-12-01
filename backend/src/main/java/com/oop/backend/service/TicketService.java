@@ -19,7 +19,7 @@ public class TicketService {
         try {
             return ticketRepository.save(ticket);
         } catch (OptimisticLockingFailureException e) {
-            // handle the exception, e.g., retry or notify the user
+            // This exception is thrown when the version of the entity in the database does not match the version in the entity
             throw new RuntimeException("Ticket update failed due to concurrent modification", e);
         }
     }
