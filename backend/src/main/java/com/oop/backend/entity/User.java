@@ -10,8 +10,12 @@ public abstract class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String name;
+
+    @Column(unique = true, nullable = false)
     private String email;
+
     private boolean isSimulated;
     private String password;
 
@@ -60,5 +64,6 @@ public abstract class User {
     public boolean isSimulated() {
         return this.isSimulated;
     }
+
     // ... getters and setters ...
 }

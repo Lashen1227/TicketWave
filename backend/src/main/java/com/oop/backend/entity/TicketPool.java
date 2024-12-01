@@ -10,7 +10,6 @@ public class TicketPool {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long poolId;
     private int maxPoolSize;
-    private int availableTickets;
 
     @ManyToOne
     @JoinColumn(name = "event_item_id")
@@ -20,7 +19,8 @@ public class TicketPool {
     private List<Ticket> tickets;
 
     // Constructors, getters, and setters
-    public TicketPool() {}
+    public TicketPool() {
+    }
 
     public TicketPool(int maxPoolSize, EventItem eventItem) {
         this.maxPoolSize = maxPoolSize;
@@ -45,12 +45,8 @@ public class TicketPool {
     }
 
     public int getAvailableTickets() {
-        int availableTickets = (int) tickets.stream().filter(ticket -> ticket.isAvailable()).count();
+        int availableTickets = (tickets == null) ? 0 : (int) tickets.stream().filter(ticket -> ticket.isAvailable()).count();
         return availableTickets;
-    }
-
-    public void setAvailableTickets(int availableTickets) {
-        this.availableTickets = availableTickets;
     }
 
     public String getEventName() {

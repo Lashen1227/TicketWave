@@ -6,6 +6,7 @@ public class EventItemDTO {
     private String eventLocation;
     private String eventDate;
     private String eventTime;
+    private Long eventId;
     private double ticketPrice;
     private String details;
     private String image;
@@ -100,5 +101,13 @@ public class EventItemDTO {
 
     public void setAvailableTickets(int availableTickets) {
         this.availableTickets = availableTickets;
+    }
+
+    public void setEventId(Long id) {
+        this.eventId = id;
+    }
+
+    public Long getEventId() {
+        return eventId;
     }
 }
