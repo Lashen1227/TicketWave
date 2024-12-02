@@ -70,7 +70,7 @@ const VendorAccount: React.FC<VendorAccountProps> = ({ userId, userName }) => {
     <>
       <Navbar onSearch={() => { }} />
       <StyledPaper>
-        <Container sx={{ marginTop: '3rem' }}>
+        <Container sx={{ paddingTop: '3rem', height: '100vh' }}>
           <Typography variant="h5" sx={{ textAlign: 'center', marginY: '2rem' }}>
             Welcome, <span style={{ color: 'primary.main' }}>{userName}</span>
           </Typography>
@@ -109,7 +109,7 @@ const VendorAccount: React.FC<VendorAccountProps> = ({ userId, userName }) => {
         onSave={handleSaveEvent} 
         vendorId={userId} 
         vendorName={userName} 
-        fetchVendorEvents={fetchVendorEvents} // Pass the fetch function as a prop
+        fetchVendorEvents={fetchVendorEvents}
       />
     </>
   );
