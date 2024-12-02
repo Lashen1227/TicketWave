@@ -1,5 +1,5 @@
 export interface Vendor {
-    id: number;
-    name: string;
-    ticketReleaseRate: number;
-  }
+  id: number;
+  name: string;
+  ticketReleaseRate: number;
+}
