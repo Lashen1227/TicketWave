@@ -45,10 +45,10 @@ export const ThemeContextProvider: React.FC<ThemeContextProviderProps> = ({ chil
         palette: {
             mode: mode === 'system' ? getSystemTheme() : mode,
             primary: {
-                light: '#64ffd3',
-                main: '#00e8a6',
-                dark: '#00b07e',
-                contrastText: '#000',
+                light: '#999999',
+                main: '#888888',
+                dark: '#000000',
+                contrastText: '#ffffff',
             },
             secondary: {
                 light: '#00a4d6',
@@ -57,8 +57,8 @@ export const ThemeContextProvider: React.FC<ThemeContextProviderProps> = ({ chil
                 contrastText: '#fff',
             },
             background: {
-                default: mode === 'dark' ? '#444444' : '#f5f5f5',
-                paper: mode === 'dark' ? '#111111' : '#fff',
+                default: mode === 'dark' ? '#333333' : '#f5f5f5',
+                paper: mode === 'dark' ? '#000000' : '#fff',
             },
             text: {
                 primary: mode === 'dark' ? '#fff' : '#000',

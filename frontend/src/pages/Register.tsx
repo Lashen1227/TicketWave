@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { TextField, Button, Typography, Box, Alert, Paper, FormControlLabel, Switch } from '@mui/material';
+import { TextField, Button, Typography, Box, Alert, Paper, FormControlLabel, Switch, CircularProgress } from '@mui/material';
 import Navbar from '../components/Navbar';
 import { register } from '../services/sessionApi';
 
@@ -14,16 +14,24 @@ const Register: React.FC<RegisterProps> = ({ onRegisterSuccess }) => {
   const [password, setPassword] = useState('');
   const [userType, setUserType] = useState('customers');
   const [error, setError] = useState('');
+  const [loading, setLoading] = useState<boolean>(false);
   const navigate = useNavigate();
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
+    setLoading(true);
     try {
       await register(name, email, password, userType);
       onRegisterSuccess();
       navigate('/login');
-    } catch (err) {
-      setError('Registration failed');
+    } catch (err: any) {
+      if (err.response && err.response.status === 409) {
+        setError('Email already exists');
+      } else {
+        setError('Registration failed');
+      }
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -93,19 +101,21 @@ const Register: React.FC<RegisterProps> = ({ onRegisterSuccess }) => {
             fullWidth
             variant="contained"
             sx={{ mt: 3, mb: 2 }}
+            disabled={loading}
           >
-            Register
+            {loading ? <CircularProgress size={24} /> : 'Register'}
           </Button>
           <Button
             fullWidth
             variant="outlined"
             onClick={() => navigate('/login')}
+            disabled={loading}
           >
             Login
           </Button>
         </Box>
         {/* warning on demo website */}
-        <Box sx={{ mt: 4, backgroundColor: 'background.paper', p: 2, borderRadius: 1 }}>
+        <Box sx={{ mt: 4, backgroundColor: 'background.default', p: 2, borderRadius: 1 }}>
           <Typography variant="caption" sx={{ color: 'error.main' }}>
             Warning: This is a demo website. Do not use real email, password, or any sensitive information.
           </Typography>

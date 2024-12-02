@@ -33,3 +33,13 @@ export const fetchEventsByVendor = async (vendorId: number): Promise<Event[]> =>
     throw error;
   }
 };
+
+export const getEventById = async (eventId: number): Promise<Event> => {
+  try {
+    const response = await axios.get(`${API_URL}/${eventId}`);
+    return response.data;
+  } catch (error) {
+    console.error(`Error fetching event with ID ${eventId}:`, error);
+    throw error;
+  }
+};
