@@ -19,9 +19,7 @@ public abstract class User {
     private boolean isSimulated;
     private String password;
 
-    // Constructors, getters, and setters
-    public User() {
-    }
+    public User() {}
 
     public User(String name, String email) {
         this.name = name;
@@ -36,8 +34,9 @@ public abstract class User {
         this.isSimulated = false;
     }
 
-    public User(String name, boolean isSimulated) {
+    public User(String name, String email, boolean isSimulated) {
         this.name = name;
+        this.email = email;
         this.isSimulated = isSimulated;
     }
 

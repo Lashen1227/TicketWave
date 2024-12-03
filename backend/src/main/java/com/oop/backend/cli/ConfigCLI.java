@@ -8,7 +8,6 @@ import com.oop.backend.entity.Ticket;
 import com.oop.backend.entity.Vendor;
 import com.oop.backend.service.CustomerService;
 import com.oop.backend.service.EventService;
-import com.oop.backend.service.TicketService;
 import com.oop.backend.service.VendorService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -169,9 +168,8 @@ public class ConfigCLI {
 
     private void addNewVendor() {
         String name = getStringInput("Enter vendor name: ");
-        String email = getStringInput("Enter email: ");
-        int ticketReleaseRate = getIntInput("Enter the ticket release rate: ");
-        Vendor vendor = new Vendor(name, ticketReleaseRate);
+        int ticketReleaseRate = getIntInput("Enter ticket release rate: ");
+        Vendor vendor = new Vendor(name, getRandomeEmail(name), ticketReleaseRate);
         vendorService.createVendor(vendor);
         System.out.println("Successfully created the vendor.");
     }
@@ -186,9 +184,8 @@ public class ConfigCLI {
 
     private void addNewCustomer() {
         String name = getStringInput("Enter customer name: ");
-        String email = getStringInput("Enter email: ");
-        int ticketRetrievalRate = getIntInput("Enter the ticket retrieval rate: ");
-        Customer customer = new Customer(name, ticketRetrievalRate);
+        int ticketRetrievalRate = getIntInput("Enter ticket retrieval rate: ");
+        Customer customer = new Customer(name, getRandomeEmail(name), ticketRetrievalRate);
         customerService.createCustomer(customer);
         System.out.println("Successfully created the customer.");
     }
@@ -204,10 +201,6 @@ public class ConfigCLI {
     private void addNewEvent() {
         long vendorId = getLongInput("Enter vendor ID: ");
         String eventName = getStringInput("Enter event name: ");
-        String eventLocation = getStringInput("Enter  location of event: ");
-        String eventDate = getStringInput("Enter the event date: ");
-        String eventTime = getStringInput("Enter the event time: ");
-        double ticketPrice = getFloatInput("Enter price of the ticket: ");
         int maxPoolSize = getIntInput("Enter maximum pool size: ");
 
         EventItem eventItem = new EventItem(eventName, vendorService.getVendorById(vendorId), true);
@@ -284,14 +277,14 @@ public class ConfigCLI {
 
         for (int i = 0; i < numOfVendors; i++) {
             int ticketReleaseRate = (int) (Math.random() * 5) + 1;
-            Vendor vendor = new Vendor("Vendor " + i, ticketReleaseRate);
+            Vendor vendor = new Vendor("Vendor " + i, getRandomeEmail("Vendor " + i), ticketReleaseRate);
             vendorService.createVendor(vendor);
         }
         logger.info("Vendors are ready");
 
         for (int i = 0; i < numOfCustomers; i++) {
             int ticketRetrievalRate = (int) (Math.random() * 5) + 1;
-            Customer customer = new Customer("Customer " + i, ticketRetrievalRate);
+            Customer customer = new Customer("Customer " + i, getRandomeEmail("Customer " + i), ticketRetrievalRate);
             customerService.createCustomer(customer);
         }
         logger.info("Customers are ready");
@@ -378,6 +371,10 @@ public class ConfigCLI {
                 scanner.nextLine();
             }
         }
+    }
+
+    private String getRandomeEmail(String name) {
+        return name.toLowerCase().replace(" ", "") + (int) (Math.random() * 1000) + "@example.com";
     }
 
     // Helper method to send configuration data to the server
