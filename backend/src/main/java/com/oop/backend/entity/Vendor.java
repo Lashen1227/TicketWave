@@ -20,8 +20,8 @@ public class Vendor extends User {
         super(name, email, password);
     }
 
-    public Vendor(String name, int ticketReleaseRate) {
-        super(name, true); // Assume simulated vendors
+    public Vendor(String name, String email, int ticketReleaseRate) {
+        super(name, email, true);
         this.ticketReleaseRate = ticketReleaseRate;
     }
 

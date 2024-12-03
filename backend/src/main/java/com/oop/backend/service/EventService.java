@@ -41,8 +41,8 @@ public class EventService {
         return eventRepository.save(savedEventItem); // Save the updated EventItem
     }
 
-    public List<EventItem> getAllEvents(boolean b) {
-        return eventRepository.findByisSimulated(b);
+    public List<EventItem> getAllEvents(boolean isSimulated) {
+        return eventRepository.findByisSimulated(isSimulated);
     }
 
     public List<EventItem> getVendorEvents(long vendorId) {
