@@ -24,7 +24,7 @@ interface EventEditorProps {
 
 const Transition = React.forwardRef(function Transition(
     props: TransitionProps & {
-        children: React.ReactElement<any, any>;
+        children: React.ReactElement;
     },
     ref: React.Ref<unknown>,
 ) {
@@ -76,7 +76,7 @@ const EventEditor: React.FC<EventEditorProps> = ({ open, onClose, event, onSave,
     }, [event, open]);
 
     const validate = () => {
-        let tempErrors = { ...errors };
+        const tempErrors = { ...errors };
         tempErrors.eventName = eventName.length > 500 ? 'Event Name cannot exceed 500 characters' : '';
         tempErrors.eventLocation = eventLocation.length > 500 ? 'Event Location cannot exceed 500 characters' : '';
         tempErrors.eventDate = eventDate ? '' : 'Event Date is required';
@@ -103,7 +103,7 @@ const EventEditor: React.FC<EventEditorProps> = ({ open, onClose, event, onSave,
                         details,
                         image,
                     };
-                    await onSave(updatedEvent);
+                    onSave(updatedEvent);
                 } else {
                     if (vendorId && vendorName) {
                         const newEvent: Event = {
@@ -117,7 +117,7 @@ const EventEditor: React.FC<EventEditorProps> = ({ open, onClose, event, onSave,
                             vendorId: vendorId,
                             vendorName: vendorName,
                         };
-                        await onSave(newEvent);
+                        onSave(newEvent);
                     } else {
                         console.error('Vendor ID or Name not found');
                     }
@@ -200,7 +200,7 @@ const EventEditor: React.FC<EventEditorProps> = ({ open, onClose, event, onSave,
                     label="Event Date"
                     name="eventDate"
                     type="date"
-                    InputLabelProps={{ shrink: true }}
+                    slotProps={{ inputLabel: { shrink: true } }}
                     value={eventDate}
                     onChange={(e) => setEventDate(e.target.value)}
                     error={!!errors.eventDate}

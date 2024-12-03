@@ -24,8 +24,15 @@ const Register: React.FC<RegisterProps> = ({ onRegisterSuccess }) => {
       await register(name, email, password, userType);
       onRegisterSuccess();
       navigate('/login');
-    } catch (err: any) {
-      if (err.response && err.response.status === 409) {
+    } catch (err: unknown) {
+      interface ErrorResponse {
+        response?: {
+          status: number;
+        };
+      }
+
+      const errorResponse = err as Error & ErrorResponse;
+      if (err instanceof Error && errorResponse.response && errorResponse.response.status === 409) {
         setError('Email already exists');
       } else {
         setError('Registration failed');
@@ -52,7 +59,7 @@ const Register: React.FC<RegisterProps> = ({ onRegisterSuccess }) => {
         margin: 'auto',
       }}>
         <Typography component="h1" variant="h5">
-          Register for Ticketin
+          Register
         </Typography>
         <FormControlLabel
           control={<Switch checked={userType === 'vendors'} onChange={handleUserTypeChange} />}
@@ -113,12 +120,6 @@ const Register: React.FC<RegisterProps> = ({ onRegisterSuccess }) => {
           >
             Login
           </Button>
-        </Box>
-        {/* warning on demo website */}
-        <Box sx={{ mt: 4, backgroundColor: 'background.default', p: 2, borderRadius: 1 }}>
-          <Typography variant="caption" sx={{ color: 'error.main' }}>
-            Warning: This is a demo website. Do not use real email, password, or any sensitive information.
-          </Typography>
         </Box>
       </Box>
     </Paper>

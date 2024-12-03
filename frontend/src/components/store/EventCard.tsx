@@ -14,7 +14,7 @@ interface EventCardProps {
 }
 
 const EventCard: React.FC<EventCardProps> = ({ event, onClick }) => {
-  const { toggleTheme, theme } = useThemeContext();
+  const { theme } = useThemeContext();
   const [isHovered, setIsHovered] = useState(false);
 
   return (

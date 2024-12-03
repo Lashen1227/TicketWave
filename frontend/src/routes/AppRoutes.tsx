@@ -18,25 +18,20 @@ const PrivateRoute = ({ element, token }: PrivateRouteProps) => {
 
 const AppRoutes = () => {
   const [token, setToken] = useState<string | null>(localStorage.getItem('authToken'));
-  const [userName, setUserName] = useState<string | null>(localStorage.getItem('userName'));
   const [userId, setUserId] = useState<number | null>(parseInt(localStorage.getItem('userId') || '0'));
   const [name, setName] = useState<string | null>(localStorage.getItem('userName'));
-  const [email, setEmail] = useState<string | null>(localStorage.getItem('userEmail'));
   const [userType, setUserType] = useState<string | null>(localStorage.getItem('userType'));
 
-  const handleLoginSuccess = (token: string, userId: number, name: string, email: string, userType: string) => {
+  const handleLoginSuccess = (token: string, userId: number, name: string, userType: string) => {
     setToken(token);
     setUserId(userId);
     setName(name);
-    setEmail(email);
     setUserType(userType);
     localStorage.setItem('authToken', token);
     localStorage.setItem('userId', userId.toString());
     localStorage.setItem('userName', name);
-    localStorage.setItem('userEmail', email);
     localStorage.setItem('userType', userType);
-
-    console.log('Login success:', token, userId, name, email, userType);
+    console.log('Login success:', token, userId, name, userType);
   };
 
   return (
