@@ -27,7 +27,7 @@ const Login: React.FC<LoginProps> = ({ onLoginSuccess }) => {
       } else {
         navigate('/');
       }
-    } catch (err) {
+    } catch {
       setError('Invalid email or password');
     } finally {
       setLoading(false);
@@ -51,7 +51,7 @@ const Login: React.FC<LoginProps> = ({ onLoginSuccess }) => {
         margin: 'auto',
       }}>
         <Typography component="h1" variant="h5">
-          Login to Ticketin
+          Login
         </Typography>
         <FormControlLabel
           control={<Switch checked={userType === 'VENDOR'} onChange={handleUserTypeChange} />}
@@ -101,12 +101,6 @@ const Login: React.FC<LoginProps> = ({ onLoginSuccess }) => {
           >
             Register
           </Button>
-        </Box>
-        {/* warning on demo website */}
-        <Box sx={{ mt: 4, backgroundColor: 'background.paper', p: 2, borderRadius: 1 }}>
-          <Typography variant="caption" sx={{ color: 'error.main' }}>
-            Warning: This is a demo website. Do not use real email, password, or any sensitive information.
-          </Typography>
         </Box>
       </Box>
     </Paper>

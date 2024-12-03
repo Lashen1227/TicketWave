@@ -5,12 +5,12 @@ import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
+// import MenuIcon from '@mui/icons-material/Menu';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import ConfirmationNumberIcon from '@mui/icons-material/ConfirmationNumber';
-import { alpha, Button, Checkbox, InputBase, styled } from '@mui/material';
+import { alpha, Checkbox, InputBase, styled } from '@mui/material';
 import Brightness5RoundedIcon from '@mui/icons-material/Brightness5Rounded';
 import BedtimeRoundedIcon from '@mui/icons-material/BedtimeRounded';
 import { useThemeContext } from './ThemeContext';
@@ -147,7 +147,7 @@ export default function Navbar({ onSearch }: NavbarProps) {
                 flexGrow: 1,
               }}
             >
-              TICKETin
+              TicketWave
             </Typography>
           </Box>
 
