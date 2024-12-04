@@ -1,12 +1,11 @@
 package com.oop.backend.service;
 
 import com.oop.backend.dto.*;
-import com.oop.backend.entity.*;
+import com.oop.backend.model.*;
 import org.springframework.stereotype.Service;
 
 @Service
 public class MappingService {
-
     public TicketDTO mapToTicketDTO(Ticket ticket) {
         TicketDTO dto = new TicketDTO();
         dto.setId(ticket.getId());

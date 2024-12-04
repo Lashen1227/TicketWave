@@ -2,7 +2,7 @@ package com.oop.backend.controller;
 
 import com.oop.backend.dto.CustomerDTO;
 import com.oop.backend.dto.TicketDTO;
-import com.oop.backend.entity.Customer;
+import com.oop.backend.model.Customer;
 import com.oop.backend.service.CustomerService;
 import com.oop.backend.service.MappingService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +12,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/customers")
@@ -24,7 +23,6 @@ public class CustomerController {
     @Autowired
     private MappingService mappingService;
 
-    // Create a new customer
     @PostMapping
     public ResponseEntity<CustomerDTO> createCustomer(@RequestBody CustomerDTO customerDTO) {
         try {
@@ -35,7 +33,6 @@ public class CustomerController {
         }
     }
 
-    // Buy a ticket
     @GetMapping("/{customerId}/buy/{eventItemId}")
     public ResponseEntity<String> purchaseTicket(@PathVariable long customerId, @PathVariable long eventItemId) {
         try {
@@ -52,7 +49,6 @@ public class CustomerController {
         }
     }
 
-    // Get all purchased tickets
     @GetMapping("/{customerId}/tickets")
     public ResponseEntity<List<TicketDTO>> getTickets(@PathVariable long customerId) {
         try {

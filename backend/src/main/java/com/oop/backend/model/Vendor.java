@@ -1,4 +1,4 @@
-package com.oop.backend.entity;
+package com.oop.backend.model;
 
 import jakarta.persistence.*;
 
@@ -9,12 +9,11 @@ import java.util.List;
 public class Vendor extends User {
     private int ticketReleaseRate;
 
+    // One vendor can have multiple events
     @OneToMany(mappedBy = "vendor", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<EventItem> events;
 
-    // Constructors, getters, and setters
-    public Vendor() {
-    }
+    public Vendor() {}
 
     public Vendor(String name, String email, String password) {
         super(name, email, password);
@@ -29,5 +28,4 @@ public class Vendor extends User {
         return ticketReleaseRate;
     }
 
-    // ... getters and setters ...
 }

@@ -1,9 +1,9 @@
 package com.oop.backend.service;
 
-import com.oop.backend.entity.Customer;
-import com.oop.backend.entity.Vendor;
-import com.oop.backend.repository.CustomerRepository;
-import com.oop.backend.repository.VendorRepository;
+import com.oop.backend.model.Customer;
+import com.oop.backend.model.Vendor;
+import com.oop.backend.repo.CustomerRepo;
+import com.oop.backend.repo.VendorRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,9 +12,9 @@ import java.util.Base64;
 @Service
 public class UserService {
     @Autowired
-    private CustomerRepository customerRepository;
+    private CustomerRepo customerRepository;
     @Autowired
-    private VendorRepository vendorRepository;
+    private VendorRepo vendorRepository;
 
     public Customer findCustomerByEmail(String email) {
         return customerRepository.findByEmail(email);
@@ -28,8 +28,8 @@ public class UserService {
         return customerRepository.findByEmail(email) != null || vendorRepository.findByEmail(email) != null;
     }
 
+    // Generate a simple token for the user
     public String generateSimpleToken(Long userId) {
-        // Generate a simple token for the user
         return Base64.getEncoder().encodeToString((userId + ":" + System.currentTimeMillis()).getBytes());
     }
 }

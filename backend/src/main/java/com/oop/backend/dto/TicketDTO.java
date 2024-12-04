@@ -7,9 +7,8 @@ public class TicketDTO {
     private String dateTime;
     private String eventId;
 
-    // Constructors, getters, and setters
-    public TicketDTO() {
-    }
+
+    public TicketDTO() {}
 
     public TicketDTO(String eventName, String ticketId, String imageUrl, String dateTime, String eventId) {
         this.eventName = eventName;

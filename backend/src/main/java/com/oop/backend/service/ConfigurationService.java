@@ -1,7 +1,7 @@
 package com.oop.backend.service;
 
 import com.oop.backend.config.Configuration;
-import com.oop.backend.repository.ConfigurationRepository;
+import com.oop.backend.repo.ConfigurationRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,7 +10,7 @@ import java.util.Optional;
 @Service
 public class ConfigurationService {
     @Autowired
-    private ConfigurationRepository configurationRepository;
+    private ConfigurationRepo configurationRepository;
 
     public Configuration getConfiguration() {
         Optional<Configuration> configuration = configurationRepository.findById(1L);

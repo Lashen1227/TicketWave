@@ -1,7 +1,7 @@
 package com.oop.backend.controller;
 
 import com.oop.backend.dto.TicketPoolDTO;
-import com.oop.backend.entity.TicketPool;
+import com.oop.backend.model.TicketPool;
 import com.oop.backend.service.MappingService;
 import com.oop.backend.service.TicketPoolService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.*;
 public class TicketPoolController {
     @Autowired
     private TicketPoolService ticketPoolService;
-
     @Autowired
     private MappingService mappingService;
 

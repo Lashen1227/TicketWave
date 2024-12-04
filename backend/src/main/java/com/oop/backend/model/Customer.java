@@ -1,8 +1,7 @@
-package com.oop.backend.entity;
+package com.oop.backend.model;
 
 import com.oop.backend.dto.TicketDTO;
 import jakarta.persistence.*;
-import lombok.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -44,6 +43,4 @@ public class Customer extends User {
                         ticket.getEventItem().getEventId().toString()))
                 .collect(Collectors.toList());
     }
-
-    // ... getters and setters ...
 }

@@ -2,8 +2,8 @@ package com.oop.backend.controller;
 
 import com.oop.backend.dto.LoginRequest;
 import com.oop.backend.dto.LoginResponse;
-import com.oop.backend.entity.Customer;
-import com.oop.backend.entity.Vendor;
+import com.oop.backend.model.Customer;
+import com.oop.backend.model.Vendor;
 import com.oop.backend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

@@ -1,13 +1,13 @@
 package com.oop.backend.service;
 
-import com.oop.backend.entity.EventItem;
-import com.oop.backend.entity.Ticket;
-import com.oop.backend.entity.TicketPool;
-import com.oop.backend.entity.Vendor;
-import com.oop.backend.repository.EventRepository;
-import com.oop.backend.repository.TicketPoolRepository;
-import com.oop.backend.repository.TicketRepository;
-import com.oop.backend.repository.VendorRepository;
+import com.oop.backend.model.EventItem;
+import com.oop.backend.model.Ticket;
+import com.oop.backend.model.TicketPool;
+import com.oop.backend.model.Vendor;
+import com.oop.backend.repo.EventRepo;
+import com.oop.backend.repo.TicketPoolRepo;
+import com.oop.backend.repo.TicketRepo;
+import com.oop.backend.repo.VendorRepo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,15 +24,15 @@ public class VendorService {
     private static final Logger logger = LoggerFactory.getLogger(VendorService.class);
 
     @Autowired
-    private VendorRepository vendorRepository;
+    private VendorRepo vendorRepository;
     @Autowired
-    private EventRepository eventRepository;
+    private EventRepo eventRepository;
     @Autowired
-    private TicketRepository ticketRepository;
+    private TicketRepo ticketRepository;
     @Autowired
     private TicketPoolService ticketPoolService;
     @Autowired
-    private TicketPoolRepository ticketPoolRepository;
+    private TicketPoolRepo ticketPoolRepository;
     @Autowired
     private UserService userService;
 
@@ -50,6 +50,7 @@ public class VendorService {
         boolean isSimulated = eventItem.isSimulated();
         if (eventItem != null) {
             TicketPool ticketPool = eventItem.getTicketPool();
+            // If the ticket pool is not full or if the vendor is simulated, create a new ticket
             if (ticketPool != null) {
                 if (ticketPool.getAvailableTickets() < ticketPool.getMaxPoolSize() || !isSimulated) {
                     Ticket ticket = new Ticket(eventItem, isSimulated);
@@ -76,6 +77,7 @@ public class VendorService {
         return vendorRepository.findById(vendorId).orElse(null);
     }
 
+    // Get the vendor of an event
     public Vendor getVendorByEventId(long eventId) {
         EventItem eventItem = eventRepository.findById(eventId).orElse(null);
         if (eventItem != null) {

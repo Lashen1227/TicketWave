@@ -1,8 +1,8 @@
 package com.oop.backend.controller;
 
 import com.oop.backend.dto.EventItemDTO;
-import com.oop.backend.entity.EventItem;
-import com.oop.backend.entity.Vendor;
+import com.oop.backend.model.EventItem;
+import com.oop.backend.model.Vendor;
 import com.oop.backend.service.EventService;
 import com.oop.backend.service.MappingService;
 import com.oop.backend.service.VendorService;
@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static com.oop.backend.cli.ConfigCLI.logger;
+import static com.oop.backend.model.Logger.logger;
 
 
 @RestController
@@ -23,14 +23,11 @@ import static com.oop.backend.cli.ConfigCLI.logger;
 public class EventController {
     @Autowired
     private EventService eventService;
-
     @Autowired
     private MappingService mappingService;
-
     @Autowired
     private VendorService vendorService;
 
-    // Create a new event
     @PostMapping
     public ResponseEntity<?> createEvent(@RequestBody EventItemDTO eventItemDTO) {
         try {
@@ -49,7 +46,6 @@ public class EventController {
         }
     }
 
-    // Get all events
     @GetMapping("/list")
     public ResponseEntity<List<EventItemDTO>> getAllEvents() {
         List<EventItemDTO> events = eventService.getAllEvents(false)
@@ -59,7 +55,6 @@ public class EventController {
         return new ResponseEntity<>(events, HttpStatus.OK);
     }
 
-    // Get all events by vendor
     @GetMapping("/{vendorId}/list")
     public ResponseEntity<List<EventItemDTO>> getVendorEvents(@PathVariable long vendorId) {
         List<EventItemDTO> events = eventService.getVendorEvents(vendorId)
@@ -69,7 +64,6 @@ public class EventController {
         return new ResponseEntity<>(events, HttpStatus.OK);
     }
 
-    // Get specific event by ID
     @GetMapping("/{eventId}")
     public ResponseEntity<EventItemDTO> getEventById(@PathVariable long eventId) {
         EventItem eventItem = eventService.getEventById(eventId);

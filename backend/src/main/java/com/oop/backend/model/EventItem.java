@@ -1,4 +1,4 @@
-package com.oop.backend.entity;
+package com.oop.backend.model;
 
 import jakarta.persistence.*;
 
@@ -162,5 +162,4 @@ public class EventItem {
     public String getDateTime() {
         return this.eventDate + " " + this.eventTime;
     }
-    // ... getters and setters ...
 }

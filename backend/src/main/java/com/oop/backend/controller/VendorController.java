@@ -1,8 +1,7 @@
 package com.oop.backend.controller;
 
 import com.oop.backend.dto.VendorDTO;
-import com.oop.backend.entity.EventItem;
-import com.oop.backend.entity.Vendor;
+import com.oop.backend.model.Vendor;
 import com.oop.backend.service.MappingService;
 import com.oop.backend.service.VendorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +19,6 @@ import java.util.stream.Collectors;
 public class VendorController {
     @Autowired
     private VendorService vendorService;
-
     @Autowired
     private MappingService mappingService;
 

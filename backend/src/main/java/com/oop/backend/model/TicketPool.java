@@ -1,4 +1,4 @@
-package com.oop.backend.entity;
+package com.oop.backend.model;
 
 import jakarta.persistence.*;
 import java.util.List;

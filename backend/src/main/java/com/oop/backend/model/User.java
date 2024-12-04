@@ -1,4 +1,4 @@
-package com.oop.backend.entity;
+package com.oop.backend.model;
 
 import jakarta.persistence.*;
 
@@ -10,14 +10,12 @@ public abstract class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String name;
+    private boolean isSimulated;
+    private String password;
 
     @Column(unique = true, nullable = false)
     private String email;
-
-    private boolean isSimulated;
-    private String password;
 
     public User() {}
 
@@ -43,26 +41,19 @@ public abstract class User {
     public Long getId() {
         return this.id;
     }
-
     public String getName() {
         return this.name;
     }
-
     public String getEmail() {
         return this.email;
     }
-
     public String getPassword() {
         return this.password;
     }
-
     public void setPassword(String password) {
         this.password = password;
     }
-
     public boolean isSimulated() {
         return this.isSimulated;
     }
-
-    // ... getters and setters ...
 }

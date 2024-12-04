@@ -1,7 +1,7 @@
 package com.oop.backend.service;
 
-import com.oop.backend.entity.Ticket;
-import com.oop.backend.repository.TicketRepository;
+import com.oop.backend.model.Ticket;
+import com.oop.backend.repo.TicketRepo;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.OptimisticLockingFailureException;
@@ -13,13 +13,18 @@ import java.util.List;
 @Transactional
 public class TicketService {
     @Autowired
-    private TicketRepository ticketRepository;
+    private TicketRepo ticketRepository;
 
+    /**
+     * Save a ticket to the database
+     * @param ticket the ticket to save
+     * @return the saved ticket
+     */
     public Ticket saveTicket(Ticket ticket) {
         try {
             return ticketRepository.save(ticket);
         } catch (OptimisticLockingFailureException e) {
-            // This exception is thrown when the version of the entity in the database does not match the version in the entity
+            // When the version of the entity in the database does not match the version in the entity
             throw new RuntimeException("Ticket update failed due to concurrent modification", e);
         }
     }

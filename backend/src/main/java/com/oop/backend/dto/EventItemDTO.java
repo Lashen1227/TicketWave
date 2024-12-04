@@ -14,7 +14,6 @@ public class EventItemDTO {
     private Long vendorId;
     private int availableTickets;
 
-    // Getters and setters
     public Long getId() {
         return id;
     }
