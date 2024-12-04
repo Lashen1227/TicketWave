@@ -10,7 +10,8 @@ public class DatabaseConfig {
     private static final String PASSWORD = "1234";
 
     // SQL to create the `configuration` table if it does not exist
-    private static final String CREATE_TABLE_QUERY = """
+    private static final String CREATE_TABLE_QUERY =
+            """
             CREATE TABLE IF NOT EXISTS configuration (
                 id INT PRIMARY KEY AUTO_INCREMENT,
                 total_tickets INT NOT NULL,
@@ -19,7 +20,6 @@ public class DatabaseConfig {
                 max_ticket_capacity INT NOT NULL
             )
             """;
-
     static {
         try {
             createDatabaseIfNotExists();
@@ -29,6 +29,11 @@ public class DatabaseConfig {
         }
     }
 
+    /**
+     * Get a connection to the database
+     * @return Connection object
+     * @throws SQLException if a database access error occurs
+     */
     public static Connection getConnection() throws SQLException {
         return DriverManager.getConnection(FULL_URL, USER, PASSWORD);
     }
@@ -37,7 +42,6 @@ public class DatabaseConfig {
         try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
              Statement statement = connection.createStatement()) {
             statement.executeUpdate("CREATE DATABASE IF NOT EXISTS " + DATABASE_NAME);
-            System.out.println("Database `" + DATABASE_NAME + "` checked/created successfully.");
         }
     }
 
@@ -45,7 +49,7 @@ public class DatabaseConfig {
         try (Connection connection = getConnection();
              Statement statement = connection.createStatement()) {
             statement.executeUpdate(CREATE_TABLE_QUERY);
-            System.out.println("Table `configuration` checked/created successfully.");
         }
     }
+
 }
