@@ -12,8 +12,7 @@ public class Configuration implements Serializable {
     private float customerRetrievalRate;
     private int maxTicketCapacity;
 
-    public Configuration() {
-    }
+    public Configuration() {}
 
     public Configuration(int totalTickets, float ticketReleaseRate, float customerRetrievalRate, int maxTicketCapacity) {
         this.totalTickets = totalTickets;

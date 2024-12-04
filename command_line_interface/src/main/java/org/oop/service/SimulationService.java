@@ -7,31 +7,30 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class SimulationService {
+    // AtomicBoolean to check if simulation is running and Available tickets count
     private final AtomicBoolean running = new AtomicBoolean(false);
     private final AtomicInteger availableTickets = new AtomicInteger(0);
+    // List to store all threads
     private final List<Thread> threads = new ArrayList<>();
 
-    /**
-     * Configures simulation parameters.
-     * @param scanner Input scanner for user input.
-     */
-    public void configureSimulation(Scanner scanner) {
-        int vendors = getIntInput(scanner, "Enter Number of Vendors: ");
-        int customers = getIntInput(scanner, "Enter Number of Customers: ");
-        int maxTickets = getIntInput(scanner, "Enter Maximum Tickets for the Simulation: ");
-
-        availableTickets.set(maxTickets);
-        System.out.println("Simulation configured: " + vendors + " vendors, " + customers + " customers, and " + maxTickets + " tickets.");
-    }
 
     public void startSimulation() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter the number of vendors: ");
+        int vendorCount = scanner.nextInt();
+        System.out.print("Enter the number of customers: ");
+        int customerCount = scanner.nextInt();
+
+        if (vendorCount <= 0 || customerCount <= 0) {
+            System.out.println("Vendors and customers count must be greater than 0. Please try again.");
+            return;
+        }
         if (running.get()) {
             System.out.println("Simulation already running. Please stop the current simulation first.");
             return;
         }
         running.set(true);
         threads.clear();
-
         System.out.println("Simulation started. Press Enter to stop the simulation.");
 
         // Thread to listen for Enter key to stop simulation
@@ -44,49 +43,48 @@ public class SimulationService {
         threads.add(stopperThread);
         stopperThread.start();
 
-        // Create and start vendor threads
-        for (int i = 1; i <= 3; i++) {
+        // Create and start vendor threads based on user input
+        for (int i = 1; i <= vendorCount; i++) {
+            final int vendorId = i;
             Thread vendorThread = new Thread(() -> {
                 while (running.get()) {
                     try {
-                        addTickets(5);
-                        Thread.sleep((long) (Math.random() * 2000 + 1000));
+                        addTickets(1, vendorId);
+                        Thread.sleep((long) (Math.random() * 2000 + 1000)); // Random delay between 1-3 seconds
                     } catch (InterruptedException e) {
                         Thread.currentThread().interrupt();
                     }
                 }
             });
-            vendorThread.setName("Vendor-" + i);
+            vendorThread.setName("Vendor-" + vendorId);
             threads.add(vendorThread);
             vendorThread.start();
         }
 
-        for (int i = 1; i <= 5; i++) {
+        // Create and start customer threads based on user input
+        for (int i = 1; i <= customerCount; i++) {
+            final int customerId = i;
             Thread customerThread = new Thread(() -> {
                 while (running.get()) {
                     try {
-                        buyTickets(1);
+                        buyTickets(1, customerId);
                         Thread.sleep((long) (Math.random() * 2000 + 1000));
                     } catch (InterruptedException e) {
                         Thread.currentThread().interrupt();
                     }
                 }
             });
-            customerThread.setName("Customer-" + i);
+            customerThread.setName("Customer-" + customerId);
             threads.add(customerThread);
             customerThread.start();
         }
     }
 
-    /**
-     * Stops the simulation process.
-     */
     public synchronized void stopSimulation() {
         if (!running.get()) {
             System.out.println("Simulation is not running.");
             return;
         }
-
         running.set(false);
         System.out.println("Stopping simulation...");
         threads.forEach(Thread::interrupt); // Interrupt all threads
@@ -95,44 +93,29 @@ public class SimulationService {
     }
 
     /**
-     * Adds tickets to the pool.
-     * @param count Number of tickets to add.
+     * Adds tickets to the available tickets count.
+     * @param count    the number of tickets to add
+     * @param vendorId the ID of the vendor adding tickets
      */
-    private synchronized void addTickets(int count) {
+    private synchronized void addTickets(int count, int vendorId) {
         availableTickets.addAndGet(count);
-        System.out.println(Thread.currentThread().getName() + " added " + count + " tickets. Available tickets: " + availableTickets.get());
+        System.out.println("[Thread " + Thread.currentThread().getId() + "]  Vendor-" + vendorId
+                + " added " + count + " ticket. Available tickets: " + availableTickets.get());
     }
 
     /**
-     * Simulates customers buying tickets.
-     * @param count Number of tickets to buy.
+     * Buys tickets from the available tickets count.
+     * @param count       the number of tickets to buy
+     * @param customerId  the ID of the customer buying tickets
      */
-    private synchronized void buyTickets(int count) {
+    private synchronized void buyTickets(int count, int customerId) {
         if (availableTickets.get() >= count) {
             availableTickets.addAndGet(-count);
-            System.out.println(Thread.currentThread().getName() + " bought " + count + " ticket(s). Remaining tickets: " + availableTickets.get());
+            System.out.println("[Thread " + Thread.currentThread().getId() + "]  Customer-" + customerId
+                    + " bought " + count + " ticket. Remaining tickets: " + availableTickets.get());
         } else {
-            System.out.println(Thread.currentThread().getName() + " tried to buy " + count + " ticket(s), but not enough tickets are available.");
-        }
-    }
-
-    /**
-     * Gets validated integer input from the user.
-     * @param scanner Input scanner.
-     * @param prompt  Input prompt.
-     * @return A valid integer.
-     */
-    private int getIntInput(Scanner scanner, String prompt) {
-        while (true) {
-            System.out.print(prompt);
-            try {
-                int value = scanner.nextInt();
-                scanner.nextLine();
-                return value;
-            } catch (Exception e) {
-                System.out.println("Integer required. Please try again.");
-                scanner.nextLine();
-            }
+            System.out.println("[Thread " + Thread.currentThread().getId() + "]  Customer-" + customerId
+                    + " tried to buy " + count + " ticket(s), but not enough tickets are available.");
         }
     }
 }

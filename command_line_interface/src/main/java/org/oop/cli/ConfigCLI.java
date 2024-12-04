@@ -1,9 +1,12 @@
 package org.oop.cli;
 
 import org.oop.service.*;
+import org.oop.dao.AppUserDAO;
+import org.oop.model.AppUser;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.List;
 import java.util.Scanner;
 
 public class ConfigCLI {
@@ -16,6 +19,9 @@ public class ConfigCLI {
     }
 
     public static void main(String[] args) {
+        System.out.println("\n*********************************************");
+        System.out.println("*** Welcome to the Event Ticketing System ***");
+        System.out.println("*********************************************");
         ConfigCLI cli = new ConfigCLI();
         cli.run();
     }
@@ -37,10 +43,10 @@ public class ConfigCLI {
                     printConfigurations();
                     break;
                 case 4:
-                    simulationService.configureSimulation(scanner);
+                    simulationService.startSimulation();
                     break;
                 case 5:
-                    simulationService.startSimulation();
+                    appUser();
                     break;
                 case 0:
                     System.out.println("Exiting the application...");
@@ -53,15 +59,27 @@ public class ConfigCLI {
         }
     }
 
+    private final AppUserDAO appUserDAO = new AppUserDAO();
+
+    private void appUser() {
+        System.out.println("\n----------- App Users -----------");
+        List<AppUser> users = appUserDAO.getAllUsers();
+
+        if (users.isEmpty()) {
+            System.out.println("No users found in the database.");
+        } else {
+            users.forEach(System.out::println);
+        }
+    }
+
     private void displayMenu() {
-        System.out.println("\n** Welcome to the Event Ticketing System - CLI **");
         String mainMenu = """
                 \n----------- Main Menu -----------
                 1 - Add Configuration Parameters
                 2 - View Configuration Parameters
                 3 - Print Configuration Parameters
-                4 - Set Simulation
-                5 - Start Simulation
+                4 - Start Simulation
+                5 - View System Users
                 0 - Exit
                 """;
         System.out.println(mainMenu);
