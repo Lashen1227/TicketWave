@@ -13,6 +13,11 @@ public class SimulationService {
     // List to store all threads
     private final List<Thread> threads = new ArrayList<>();
 
+    public static final String Reset = "\u001B[0m";
+    public static final String Red = "\u001B[31m";
+    public static final String Green = "\u001B[32m";
+    public static final String Yellow = "\u001B[33m";
+    public static final String Magenta = "\u001B[35m";
 
     public void startSimulation() {
         Scanner scanner = new Scanner(System.in);
@@ -22,11 +27,11 @@ public class SimulationService {
         int customerCount = scanner.nextInt();
 
         if (vendorCount <= 0 || customerCount <= 0) {
-            System.out.println("Vendors and customers count must be greater than 0. Please try again.");
+            System.out.println(Red  +"Vendors and customers count must be greater than 0. Please try again."  + Reset);
             return;
         }
         if (running.get()) {
-            System.out.println("Simulation already running. Please stop the current simulation first.");
+            System.out.println(Red + "Simulation already running. Please stop the current simulation first." + Reset);
             return;
         }
         running.set(true);
@@ -82,7 +87,7 @@ public class SimulationService {
 
     public synchronized void stopSimulation() {
         if (!running.get()) {
-            System.out.println("Simulation is not running.");
+            System.out.println(Red + "Simulation is not running." + Reset);
             return;
         }
         running.set(false);
@@ -99,8 +104,8 @@ public class SimulationService {
      */
     private synchronized void addTickets(int count, int vendorId) {
         availableTickets.addAndGet(count);
-        System.out.println("[Thread " + Thread.currentThread().getId() + "]  Vendor-" + vendorId
-                + " added " + count + " ticket. Available tickets: " + availableTickets.get());
+        System.out.println(Magenta + "[Thread " + Thread.currentThread().getId() + "]  Vendor-" + vendorId
+                + " added " + count + " ticket. Available tickets: " + availableTickets.get() + Reset);
     }
 
     /**
@@ -111,11 +116,11 @@ public class SimulationService {
     private synchronized void buyTickets(int count, int customerId) {
         if (availableTickets.get() >= count) {
             availableTickets.addAndGet(-count);
-            System.out.println("[Thread " + Thread.currentThread().getId() + "]  Customer-" + customerId
-                    + " bought " + count + " ticket. Remaining tickets: " + availableTickets.get());
+            System.out.println(Green + "[Thread " + Thread.currentThread().getId() + "]  Customer-" + customerId
+                    + " bought " + count + " ticket. Remaining tickets: " + availableTickets.get() + Reset);
         } else {
-            System.out.println("[Thread " + Thread.currentThread().getId() + "]  Customer-" + customerId
-                    + " tried to buy " + count + " ticket(s), but not enough tickets are available.");
+            System.out.println(Yellow + "[Thread " + Thread.currentThread().getId() + "]  Customer-" + customerId
+                    + " tried to buy " + count + " ticket(s), but not enough tickets are available." + Reset);
         }
     }
 }
