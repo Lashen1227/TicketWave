@@ -1,11 +1,13 @@
 .App {
   text-align: center;
+  background-color: #1a1b26; /* Tokyo Night Blue dark background */
+  color: #c0caf5; /* Primary text color */
 }
 
 .App-logo {
   height: 40vmin;
   pointer-events: none;
-  color: #00a4d6;
+  color: #7aa2f7; /* Vibrant Tokyo Night Blue for logo */
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -15,18 +17,26 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: #1e222a; /* Slightly darker header for contrast */
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  color: #c0caf5; /* Primary header text */
+  border: 1px solid #3b4261; /* Subtle border to define header */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5); /* Soft shadow */
 }
 
 .App-link {
-  color: #61dafb;
+  color: #89ddff; /* Bright Tokyo Night Blue for links */
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.App-link:hover {
+  color: #7aa2f7; /* Slightly darker on hover for contrast */
 }
 
 @keyframes App-logo-spin {
@@ -36,4 +46,64 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+button {
+  background-color: #7aa2f7; /* Primary Tokyo Night Blue for buttons */
+  color: #ffffff;
+  border: none;
+  border-radius: 12px;
+  padding: 10px 20px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #364fc7; /* Darker shade on hover */
+}
+
+button:active {
+  background-color: #1a1b26; /* Darker and muted when clicked */
+}
+
+button:focus {
+  outline: 2px solid #89ddff; /* Highlight for accessibility */
+}
+
+footer {
+  background-color: #1a1b26; /* Dark footer */
+  color: #a9b1d6; /* Muted text */
+  padding: 20px;
+  text-align: center;
+  border-top: 1px solid #3b4261; /* Top border to separate */
+}
+
+input, textarea {
+  background-color: #2b2f3a; /* Input background */
+  color: #c0caf5; /* Input text color */
+  border: 1px solid #3b4261; /* Subtle border */
+  border-radius: 8px;
+  padding: 10px;
+  font-size: 1rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+input:focus, textarea:focus {
+  outline: 2px solid #7aa2f7; /* Focus outline */
+}
+
+.container {
+  padding: 20px;
+  margin: 0 auto;
+  max-width: 1200px;
+  background-color: #1e222a;
+  border-radius: 12px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #c0caf5; /* Heading color */
+  font-weight: 600;
 }

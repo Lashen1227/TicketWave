@@ -68,7 +68,7 @@ const VendorAccount: React.FC<VendorAccountProps> = ({ userId, userName }) => {
 
   return (
     <>
-      <Navbar onSearch={() => { }} />
+      <Navbar />
       <StyledPaper>
         <Container sx={{ paddingTop: '3rem', height: '100vh' }}>
           <Typography variant="h5" sx={{ textAlign: 'center', marginY: '2rem' }}>

@@ -40,7 +40,7 @@ const Login: React.FC<LoginProps> = ({ onLoginSuccess }) => {
 
   return (
     <Paper>
-      <Navbar onSearch={() => { }} />
+      <Navbar />
       <Box sx={{
         display: 'flex',
         flexDirection: 'column',

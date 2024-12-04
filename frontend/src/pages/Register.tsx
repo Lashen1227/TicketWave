@@ -48,7 +48,7 @@ const Register: React.FC<RegisterProps> = ({ onRegisterSuccess }) => {
 
   return (
     <Paper>
-      <Navbar onSearch={() => { }} />
+      <Navbar />
       <Box sx={{
         display: 'flex',
         flexDirection: 'column',

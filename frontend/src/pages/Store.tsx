@@ -11,7 +11,7 @@ import { Box, styled } from '@mui/system';
 
 const Store = () => {
   const [events, setEvents] = useState<Event[]>([]);
-  const [searchQuery, setSearchQuery] = useState<string>('');
+  const [searchQuery] = useState<string>('');
   const [dialogOpen, setDialogOpen] = useState<boolean>(false);
   const [selectedEvent, setSelectedEvent] = useState<Event | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
@@ -33,10 +33,6 @@ const Store = () => {
     } finally {
       setLoading(false);
     }
-  };
-
-  const handleSearch = (query: string) => {
-    setSearchQuery(query);
   };
 
   const handleCardClick = async (event: Event) => {
@@ -84,7 +80,7 @@ const Store = () => {
       height: '100vh',
       marginX: '0',
     }}>
-      <Navbar onSearch={handleSearch} />
+      <Navbar />
       <StyledPaper>
         <Container sx={{ paddingTop: '5rem', width: '100%' }}>
           {token && (

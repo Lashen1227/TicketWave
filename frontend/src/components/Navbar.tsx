@@ -5,22 +5,16 @@ import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
-// import MenuIcon from '@mui/icons-material/Menu';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import ConfirmationNumberIcon from '@mui/icons-material/ConfirmationNumber';
-import { alpha, Checkbox, InputBase, styled } from '@mui/material';
+import { alpha, Checkbox } from '@mui/material';
 import Brightness5RoundedIcon from '@mui/icons-material/Brightness5Rounded';
 import BedtimeRoundedIcon from '@mui/icons-material/BedtimeRounded';
 import { useThemeContext } from './ThemeContext';
-import SearchIcon from '@mui/icons-material/Search';
 
-interface NavbarProps {
-  onSearch: (query: string) => void;
-}
-
-export default function Navbar({ onSearch }: NavbarProps) {
+export default function Navbar() {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const { toggleTheme, theme } = useThemeContext();
   const token = localStorage.getItem('authToken');
@@ -48,10 +42,6 @@ export default function Navbar({ onSearch }: NavbarProps) {
 
   const isDarkMode = theme.palette.mode === 'dark';
 
-  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    onSearch(event.target.value);
-  };
-
   const handleLogout = () => {
     localStorage.removeItem('authToken');
     localStorage.removeItem('userName');
@@ -68,50 +58,6 @@ export default function Navbar({ onSearch }: NavbarProps) {
     handleClose();
     navigate('/register');
   };
-
-  const Search = styled('div')(({ theme }) => ({
-    position: 'relative',
-    borderRadius: theme.shape.borderRadius,
-    border: '1px solid',
-    backgroundColor: alpha(theme.palette.common.white, 0.15),
-    '&:hover': {
-      backgroundColor: alpha(theme.palette.common.white, 0.25),
-    },
-    marginLeft: 0,
-    marginRight: theme.spacing(1),
-    width: '100%',
-    [theme.breakpoints.up('sm')]: {
-      marginLeft: theme.spacing(1),
-      width: 'auto',
-    },
-  }));
-
-  const SearchIconWrapper = styled('div')(({ theme }) => ({
-    padding: theme.spacing(1),
-    height: '100%',
-    position: 'absolute',
-    pointerEvents: 'none',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-  }));
-
-  const StyledInputBase = styled(InputBase)(({ theme }) => ({
-    color: 'inherit',
-    width: '100%',
-    '& .MuiInputBase-input': {
-      padding: theme.spacing(1, 1, 1, 0),
-      paddingLeft: `calc(1em + ${theme.spacing(3)})`,
-      transition: theme.transitions.create('width'),
-      height: '1em',
-      [theme.breakpoints.up('sm')]: {
-        width: '12ch',
-        '&:focus': {
-          width: '25ch',
-        },
-      },
-    },
-  }));
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -150,19 +96,6 @@ export default function Navbar({ onSearch }: NavbarProps) {
               TicketWave
             </Typography>
           </Box>
-
-          {location.pathname === '/' && (
-            <Search>
-              <SearchIconWrapper>
-                <SearchIcon />
-              </SearchIconWrapper>
-              <StyledInputBase
-                placeholder="Search…"
-                inputProps={{ 'aria-label': 'search' }}
-                onChange={handleSearchChange}
-              />
-            </Search>
-          )}
 
           <div>
             <Checkbox
