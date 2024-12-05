@@ -99,7 +99,6 @@ public class ConfigCLI {
                     System.out.println(Red + "Floating-point numbers are not allowed. Please try again." + Reset);
                     continue;
                 }
-
                 return choice;
             } catch (NumberFormatException e) {
                 System.out.println(Red + "Invalid input. Please enter a valid integer." + Reset);

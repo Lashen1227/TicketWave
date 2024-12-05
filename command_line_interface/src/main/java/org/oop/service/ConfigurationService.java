@@ -10,9 +10,12 @@ import java.util.Scanner;
  * Service class to handle Configuration-related operations.
  */
 public class ConfigurationService {
+    public static final String Red = "\u001B[31m";
+    public static final String Reset = "\u001B[0m";
 
     // Save a new configuration to the database
     public boolean saveConfiguration(Configuration config) {
+        // SQL query to insert a new configuration
         String query = "INSERT INTO configuration (total_tickets, ticket_release_rate, customer_retrieval_rate, max_ticket_capacity) VALUES (?, ?, ?, ?)";
 
         try (Connection connection = DatabaseConfig.getConnection();
@@ -26,7 +29,7 @@ public class ConfigurationService {
             return preparedStatement.executeUpdate() > 0;
 
         } catch (SQLException e) {
-            System.err.println("Error saving configuration: " + e.getMessage());
+            System.err.println(Red + "Error saving configuration: " + e.getMessage() + Reset);
             return false;
         }
     }
@@ -53,7 +56,7 @@ public class ConfigurationService {
             }
 
         } catch (SQLException e) {
-            System.err.println("Error retrieving configuration: " + e.getMessage());
+            System.err.println(Red + "Error retrieving configuration: " + e.getMessage() + Reset);
         }
 
         return config;
@@ -75,7 +78,7 @@ public class ConfigurationService {
             return preparedStatement.executeUpdate() > 0;
 
         } catch (SQLException e) {
-            System.err.println("Error updating configuration: " + e.getMessage());
+            System.err.println(Red + "Error updating configuration: " + e.getMessage() + Reset);
             return false;
         }
     }
@@ -89,28 +92,36 @@ public class ConfigurationService {
 
             preparedStatement.setInt(1, id);
             return preparedStatement.executeUpdate() > 0;
-
         } catch (SQLException e) {
-            System.err.println("Error deleting configuration: " + e.getMessage());
+            System.err.println(Red + "Error deleting configuration: " + e.getMessage() + Reset);
             return false;
         }
     }
 
     // Add a configuration interactively via CLI
     public void addConfiguration(Scanner scanner) {
-        System.out.println("\n** Add Configuration **");
+        System.out.println("\n-------------- Add Configuration --------------");
 
         int totalTickets = getIntInput(scanner, "Enter total tickets: ");
         float ticketReleaseRate = getFloatInput(scanner, "Enter ticket release rate: ");
         float customerRetrievalRate = getFloatInput(scanner, "Enter customer retrieval rate: ");
-        int maxTicketCapacity = getIntInput(scanner, "Enter max ticket capacity: ");
+
+        int maxTicketCapacity;
+        while (true) {
+            maxTicketCapacity = getIntInput(scanner, "Enter max ticket capacity: ");
+            if (maxTicketCapacity > totalTickets) {
+                break;
+            } else {
+                System.out.println(Red + "Max ticket capacity must be greater than total tickets. Please try again." + Reset);
+            }
+        }
 
         Configuration config = new Configuration(totalTickets, ticketReleaseRate, customerRetrievalRate, maxTicketCapacity);
 
         if (saveConfiguration(config)) {
             System.out.println("Configuration added successfully.");
         } else {
-            System.out.println("Error adding configuration. Please try again.");
+            System.out.println(Red + "Error adding configuration. Please try again." + Reset);
         }
     }
 
@@ -130,11 +141,9 @@ public class ConfigurationService {
                         .append("Customer Retrieval Rate: ").append(resultSet.getFloat("customer_retrieval_rate")).append("\n")
                         .append("Max Ticket Capacity: ").append(resultSet.getInt("max_ticket_capacity")).append("\n\n");
             }
-
         } catch (SQLException e) {
-            System.err.println("Error fetching configurations: " + e.getMessage());
+            System.err.println(Red + "Error fetching configurations: " + e.getMessage() + Reset);
         }
-
         return configurations.toString();
     }
 
@@ -146,17 +155,17 @@ public class ConfigurationService {
                 String input = scanner.nextLine();
 
                 if (input.trim().isEmpty() || !input.matches("\\d+")) {
-                    System.out.println("Input must be a positive integer. Please try again.");
+                    System.out.println(Red + "Input must be a positive integer. Please try again." + Reset);
                 } else {
                     int value = Integer.parseInt(input);
                     if (value <= 0) {
-                        System.out.println("Value must be greater than zero. Please try again.");
+                        System.out.println(Red + "Value must be greater than zero. Please try again." + Reset);
                     } else {
                         return value;
                     }
                 }
             } catch (Exception e) {
-                System.out.println("Invalid input. Please enter a valid positive integer.");
+                System.out.println(Red + "Invalid input. Please enter a valid positive integer." + Reset);
             }
         }
     }
@@ -169,17 +178,17 @@ public class ConfigurationService {
                 String input = scanner.nextLine();
 
                 if (input.trim().isEmpty() || !input.matches("\\d+(\\.\\d+)?")) {
-                    System.out.println("Input must be a positive number. Please try again.");
+                    System.out.println("Input must be a positive number. Please try again." + Reset);
                 } else {
                     float value = Float.parseFloat(input);
                     if (value <= 0) {
-                        System.out.println("Value must be greater than zero. Please try again.");
+                        System.out.println(Red + "Value must be greater than zero. Please try again." + Reset);
                     } else {
                         return value;
                     }
                 }
             } catch (Exception e) {
-                System.out.println("Invalid input. Please enter a valid positive number.");
+                System.out.println(Red + "Invalid input. Please enter a valid positive number." + Reset);
             }
         }
     }
