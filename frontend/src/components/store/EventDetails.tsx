@@ -11,8 +11,7 @@ import { useTheme } from '@mui/material/styles';
 import { Event } from '../../types/Event';
 import { TransitionProps } from '@mui/material/transitions';
 import { alpha, Box, Grow, CircularProgress } from '@mui/material';
-import ConfirmationNumberRoundedIcon from '@mui/icons-material/ConfirmationNumberRounded';
-import BookmarkAddRoundedIcon from '@mui/icons-material/BookmarkAddRounded';
+import BookmarkAddRoundedIcon from '@mui/icons-material/Bookmark';
 import { purchaseTicket } from '../../services/customerApi';
 
 interface EventDetailsProps {
@@ -79,12 +78,13 @@ const EventDetails: React.FC<EventDetailsProps> = ({ open, onClose, event, isSig
                     display: 'flex',
                     flexDirection: 'column',
                     alignItems: 'center',
+                    backgroundColor: theme.palette.background.paper,
                     justifyContent: 'center',
                     height: '100%',
                     padding: '2rem',
                 }}>
                     <DialogTitle id="responsive-dialog-title">
-                        Ticket Purchased Successfully
+                        Ticket Purchased Successfully!
                     </DialogTitle>
                     <DialogActions>
                         <Button onClick={handleClose} variant="contained">
@@ -168,19 +168,18 @@ const EventDetails: React.FC<EventDetailsProps> = ({ open, onClose, event, isSig
                             {isSignedIn ? (
                                 <>
                                     <Button variant="outlined" endIcon={<BookmarkAddRoundedIcon />}>
-                                        Watchlist
+                                        Bookmark
                                     </Button>
                                     <Button 
                                         variant="contained" 
-                                        endIcon={<ConfirmationNumberRoundedIcon />} 
                                         onClick={buyTicket} 
                                         disabled={event?.availableTickets === 0 || purchaseLoading}
                                     >
-                                        {purchaseLoading ? <CircularProgress size={24} /> :(event?.availableTickets === 0 ? 'Out of stock, Check back later' : `Buy Ticket $${event?.ticketPrice}`)}
+                                        {purchaseLoading ? <CircularProgress size={24} /> :(event?.availableTickets === 0 ? 'Out of stock, Check later' : `Buy Ticket $${event?.ticketPrice}`)}
                                     </Button>
                                 </>
                             ) : (
-                                <Button variant="contained" endIcon={<ConfirmationNumberRoundedIcon />} onClick={() => window.location.href = '/login'}>
+                                <Button variant="contained"  onClick={() => window.location.href = '/login'}>
                                     Login to Buy Ticket
                                 </Button>
                             )}

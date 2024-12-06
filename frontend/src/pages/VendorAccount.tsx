@@ -72,13 +72,10 @@ const VendorAccount: React.FC<VendorAccountProps> = ({ userId, userName }) => {
       <StyledPaper>
         <Container sx={{ paddingTop: '3rem', height: '100vh' }}>
           <Typography variant="h5" sx={{ textAlign: 'center', marginY: '2rem' }}>
-            Welcome, <span style={{ color: 'primary.main' }}>{userName}</span>
+            Welcome  <span style={{ color: 'primary.main' }}>{userName}</span>
           </Typography>
-          <Card variant='outlined' sx={{ padding: '1rem' }}>
+          <Card variant='outlined' sx={{ padding: '1rem'}}>
             <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', paddingX: '1rem' }}>
-              <Typography variant="h6" sx={{ textAlign: 'left', flexGrow: 1 }}>
-                Event Management
-              </Typography>
               <Button variant='contained' color='primary' sx={{ margin: '1rem' }} onClick={handleCreateEventClick}>
                 Create Event
               </Button>

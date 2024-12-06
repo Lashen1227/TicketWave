@@ -77,13 +77,13 @@ const EventEditor: React.FC<EventEditorProps> = ({ open, onClose, event, onSave,
 
     const validate = () => {
         const tempErrors = { ...errors };
-        tempErrors.eventName = eventName.length > 500 ? 'Event Name cannot exceed 500 characters' : '';
-        tempErrors.eventLocation = eventLocation.length > 500 ? 'Event Location cannot exceed 500 characters' : '';
-        tempErrors.eventDate = eventDate ? '' : 'Event Date is required';
-        tempErrors.eventTime = eventTime ? '' : 'Event Time is required';
-        tempErrors.ticketPrice = ticketPrice && parseFloat(ticketPrice) > 0 ? '' : 'Ticket Price must be a positive number';
-        tempErrors.details = details.length > 2000 ? 'Details cannot exceed 2000 characters' : '';
-        tempErrors.image = image.length > 1000 ? 'Image URL cannot exceed 1000 characters' : '';
+        tempErrors.eventName = eventName.length > 30 ? 'Event Name cannot exceed 50 characters' : '';
+        tempErrors.eventLocation = eventLocation.length > 30 ? 'Location cannot exceed 30 characters' : '';
+        tempErrors.eventDate = eventDate ? '' : 'Date required';
+        tempErrors.eventTime = eventTime ? '' : 'Time required';
+        tempErrors.ticketPrice = ticketPrice? '' : 'Ticke price required';
+        tempErrors.details = details.length > 1000 ? 'Details cannot exceed 1000 characters' : '';
+        tempErrors.image = image.length > 900? 'URL is to long' : '';
         setErrors(tempErrors);
         return Object.values(tempErrors).every(x => x === '');
     };
@@ -184,7 +184,7 @@ const EventEditor: React.FC<EventEditorProps> = ({ open, onClose, event, onSave,
                     required
                     fullWidth
                     id="eventLocation"
-                    label="Event Location"
+                    label="Location"
                     name="eventLocation"
                     autoComplete="eventLocation"
                     value={eventLocation}
@@ -197,7 +197,7 @@ const EventEditor: React.FC<EventEditorProps> = ({ open, onClose, event, onSave,
                     required
                     fullWidth
                     id="eventDate"
-                    label="Event Date"
+                    label="Date"
                     name="eventDate"
                     type="date"
                     slotProps={{ inputLabel: { shrink: true } }}
@@ -211,7 +211,7 @@ const EventEditor: React.FC<EventEditorProps> = ({ open, onClose, event, onSave,
                     required
                     fullWidth
                     id="eventTime"
-                    label="Event Time"
+                    label="Time"
                     name="eventTime"
                     type="time"
                     InputLabelProps={{ shrink: true }}

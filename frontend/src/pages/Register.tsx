@@ -47,7 +47,7 @@ const Register: React.FC<RegisterProps> = ({ onRegisterSuccess }) => {
   };
 
   return (
-    <Paper>
+    <Paper style={{border: 'none'}}>
       <Navbar />
       <Box sx={{
         display: 'flex',
@@ -84,7 +84,7 @@ const Register: React.FC<RegisterProps> = ({ onRegisterSuccess }) => {
             required
             fullWidth
             id="email"
-            label="Email Address"
+            label="Email"
             name="email"
             autoComplete="email"
             value={email}

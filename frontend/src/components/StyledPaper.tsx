@@ -7,11 +7,12 @@ interface StyledPaperProps {
 
 const StyledPaper: React.FC<StyledPaperProps> = ({ children }) => {
     return (
-        <Paper 
+        <Paper style={{border: 'none'}}
         sx={{ 
             minHeight: "fill-available",
             width: "fill-available",
             margin: "0",
+            borderColor: "none",
             borderRadius: "0",
              }}
              >

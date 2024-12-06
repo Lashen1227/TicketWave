@@ -1,13 +1,27 @@
 .App {
   text-align: center;
-  background-color: #1a1b26; /* Tokyo Night Blue dark background */
+  background-color: #1a1b26;
   color: #c0caf5; /* Primary text color */
+}
+
+
+@media (prefers-color-scheme: light) {
+  .App {
+    background-color: #cfe2ff;
+    color: #0d3b66;
+  }
 }
 
 .App-logo {
   height: 40vmin;
   pointer-events: none;
-  color: #7aa2f7; /* Vibrant Tokyo Night Blue for logo */
+  color: #7aa2f7;
+}
+
+@media (prefers-color-scheme: light) {
+  .App-logo {
+    color: #8abaff;
+  }
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -17,16 +31,25 @@
 }
 
 .App-header {
-  background-color: #1e222a; /* Slightly darker header for contrast */
+  background-color: #1e222a;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: #c0caf5; /* Primary header text */
-  border: 1px solid #3b4261; /* Subtle border to define header */
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5); /* Soft shadow */
+  color: #c0caf5;
+  border: 1px solid #3b4261;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+@media (prefers-color-scheme: light) {
+  .App-header {
+    background-color: #e3f2fd;
+    color: #0d3b66;
+    border: 1px solid #89b4fa;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  }
 }
 
 .App-link {
@@ -35,8 +58,20 @@
   font-weight: 500;
 }
 
+@media (prefers-color-scheme: light) {
+  .App-link {
+    color: #7eaaff; 
+  }
+}
+
 .App-link:hover {
-  color: #7aa2f7; /* Slightly darker on hover for contrast */
+  color: #7aa2f7;
+}
+
+@media (prefers-color-scheme: light) {
+  .App-link:hover {
+    color: #5c94e0;
+  }
 }
 
 @keyframes App-logo-spin {
@@ -47,6 +82,7 @@
     transform: rotate(360deg);
   }
 }
+
 
 button {
   background-color: #7aa2f7; /* Primary Tokyo Night Blue for buttons */
@@ -59,30 +95,54 @@ button {
   transition: background-color 0.3s ease;
 }
 
+
+@media (prefers-color-scheme: light) {
+  button {
+    background-color: #8abaff;
+  }
+}
+
 button:hover {
-  background-color: #364fc7; /* Darker shade on hover */
+  background-color: #364fc7;
+}
+
+@media (prefers-color-scheme: light) {
+  button:hover {
+    background-color: #7eaaff; 
+  }
 }
 
 button:active {
-  background-color: #1a1b26; /* Darker and muted when clicked */
+  background-color: #1a1b26;
 }
 
 button:focus {
-  outline: 2px solid #89ddff; /* Highlight for accessibility */
+  outline: 2px solid #89ddff;
 }
+
 
 footer {
-  background-color: #1a1b26; /* Dark footer */
-  color: #a9b1d6; /* Muted text */
+  background-color: #1a1b26;
+  color: #a9b1d6;
   padding: 20px;
   text-align: center;
-  border-top: 1px solid #3b4261; /* Top border to separate */
+  border-top: 1px solid #3b4261;
 }
 
+
+@media (prefers-color-scheme: light) {
+  footer {
+    background-color: #e3f2fd;
+    color: #0d3b66;
+    border-top: 1px solid #7eaaff;
+  }
+}
+
+
 input, textarea {
-  background-color: #2b2f3a; /* Input background */
-  color: #c0caf5; /* Input text color */
-  border: 1px solid #3b4261; /* Subtle border */
+  background-color: #2b2f3a;
+  color: #c0caf5;
+  border: 1px solid #3b4261;
   border-radius: 8px;
   padding: 10px;
   font-size: 1rem;
@@ -90,9 +150,19 @@ input, textarea {
   box-sizing: border-box;
 }
 
-input:focus, textarea:focus {
-  outline: 2px solid #7aa2f7; /* Focus outline */
+
+@media (prefers-color-scheme: light) {
+  input, textarea {
+    background-color: #e3f2fd;
+    color: #0d3b66;
+    border: 1px solid #7eaaff;
+  }
 }
+
+input:focus, textarea:focus {
+  outline: 2px solid #7aa2f7;
+}
+
 
 .container {
   padding: 20px;
@@ -103,7 +173,24 @@ input:focus, textarea:focus {
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
 }
 
+
+@media (prefers-color-scheme: light) {
+  .container {
+    background-color: #ffffff;
+    color: #0d3b66;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  }
+}
+
+
 h1, h2, h3, h4, h5, h6 {
-  color: #c0caf5; /* Heading color */
+  color: #c0caf5;
   font-weight: 600;
+}
+
+
+@media (prefers-color-scheme: light) {
+  h1, h2, h3, h4, h5, h6 {
+    color: #0d3b66;
+  }
 }

@@ -39,7 +39,7 @@ const Login: React.FC<LoginProps> = ({ onLoginSuccess }) => {
   };
 
   return (
-    <Paper>
+    <Paper style={{border: 'none'}}>
       <Navbar />
       <Box sx={{
         display: 'flex',
@@ -64,7 +64,7 @@ const Login: React.FC<LoginProps> = ({ onLoginSuccess }) => {
             required
             fullWidth
             id="email"
-            label="Email Address"
+            label="Email"
             name="email"
             autoComplete="email"
             autoFocus

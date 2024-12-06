@@ -41,26 +41,26 @@ export const ThemeContextProvider: React.FC<ThemeContextProviderProps> = ({ chil
         palette: {
             mode,
             primary: {
-                light: mode === 'light' ? '#ffa94d' : '#8c97ac', // Orange for light mode, lighter Tokyo Night Blue for dark
-                main: mode === 'light' ? '#ff8c42' : '#7aa2f7', // Vibrant orange for light mode, Tokyo Night Blue for dark
-                dark: mode === 'light' ? '#e0701f' : '#364fc7', // Darker orange or blue
-                contrastText: '#ffffff', // White text for primary buttons
+                light: mode === 'light' ? '#8abaff' : '#8c97ac', // Lighter shade of the primary color
+                main: mode === 'light' ? '#89b4fa' : '#7aa2f7',  // Primary color
+                dark: mode === 'light' ? '#5c94e0' : '#364fc7', // Darker shade of the primary color
+                contrastText: '#ffffff',
             },
             secondary: {
-                light: mode === 'light' ? '#ffd8a8' : '#a4cafe', // Soft orange for light mode
-                main: mode === 'light' ? '#ffc078' : '#89ddff', // Vibrant complementary orange
-                dark: mode === 'light' ? '#e8590c' : '#0d47a1', // Dark orange or blue
-                contrastText: '#000000', // Black text for secondary buttons
+                light: mode === 'light' ? '#a6c8ff' : '#a4cafe', // Lighter shade of the secondary color
+                main: mode === 'light' ? '#7eaaff' : '#89ddff',  // Secondary color
+                dark: mode === 'light' ? '#5c94e0' : '#0d47a1',  // Darker shade of the secondary color
+                contrastText: '#000000',
             },
             background: {
-                default: mode === 'light' ? '#fff4e6' : '#1a1b26', // Light: muted orange, Dark: Tokyo Night Blue
-                paper: mode === 'light' ? '#fff1e0' : '#1e222a', // Light: soft paper orange, Dark: paper background
+                default: mode === 'light' ? '#cfe2ff' : '#1a1b26',
+                paper: mode === 'light' ? '#e3f2fd' : '#1e222a',
             },
             text: {
-                primary: mode === 'light' ? '#5f370e' : '#c0caf5', // Light: deep brown, Dark: soft blue
-                secondary: mode === 'light' ? '#8f5833' : '#a9b1d6', // Muted orange-brown or blue
+                primary: mode === 'light' ? '#0d3b66' : '#c0caf5',
+                secondary: mode === 'light' ? '#5b7293' : '#a9b1d6',
             },
-            divider: mode === 'light' ? '#ffc078' : '#3b4261', // Subtle divider
+            divider: mode === 'light' ? '#89b4fa' : '#3b4261',
         },
         components: {
             MuiButton: {
@@ -71,19 +71,19 @@ export const ThemeContextProvider: React.FC<ThemeContextProviderProps> = ({ chil
                     },
                 },
             },
-            MuiPaper: {
+            MuiPaper: { 
                 styleOverrides: {
                     root: {
                         border: `2px solid ${
-                            mode === 'light' ? '#ff8c42' : '#364fc7'
-                        }`, // Shiny border for cards
-                        boxShadow: '0px 6px 15px rgba(0, 0, 0, 0.2)', // Subtle shadow
+                            mode === 'light' ? '#89b4fa' : '#364fc7'
+                        }`,
+                        boxShadow: '0px 6px 15px rgba(0, 0, 0, 0.2)',
                         transition: 'border-color 0.3s ease, box-shadow 0.3s ease',
                         '&:hover': {
-                            borderColor: mode === 'light' ? '#e0701f' : '#7aa2f7', // Highlight border on hover
+                            borderColor: mode === 'light' ? '#5c94e0' : '#7aa2f7',
                             boxShadow: '0px 8px 20px rgba(0, 0, 0, 0.3)', // Deeper shadow on hover
                         },
-                        backgroundColor: mode === 'light' ? '#fff1e0' : '#1e222a',
+                        backgroundColor: mode === 'light' ? '#e3f2fd' : '#1e222a',
                     },
                 },
             },

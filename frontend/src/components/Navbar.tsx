@@ -8,7 +8,7 @@ import IconButton from '@mui/material/IconButton';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
-import ConfirmationNumberIcon from '@mui/icons-material/ConfirmationNumber';
+import ConfirmationNumberIcon from '@mui/icons-material/ConfirmationNumberTwoTone';
 import { alpha, Checkbox } from '@mui/material';
 import Brightness5RoundedIcon from '@mui/icons-material/Brightness5Rounded';
 import BedtimeRoundedIcon from '@mui/icons-material/BedtimeRounded';
@@ -64,7 +64,8 @@ export default function Navbar() {
       <AppBar sx={{
         backdropFilter: "blur(20px)",
         WebkitBackdropFilter: "blur(20px)",
-        backgroundColor: alpha(theme.palette.background.paper, 0.6),
+        border: 'none',
+        backgroundColor: alpha(isDarkMode ? theme.palette.background.paper : '#335074', 0.9), // opacity 
         color: theme.palette.text.primary,
         boxShadow: 0,
       }}>
@@ -85,9 +86,9 @@ export default function Navbar() {
               sx={{
                 mr: 2,
                 display: { xs: 'none', md: 'flex' },
-                fontFamily: 'monospace',
+                fontFamily: 'Raleway, sans-serif',
                 fontWeight: 700,
-                letterSpacing: '.3rem',
+                letterSpacing: '.2rem',
                 color: 'primary.main',
                 textDecoration: 'none',
                 flexGrow: 1,
