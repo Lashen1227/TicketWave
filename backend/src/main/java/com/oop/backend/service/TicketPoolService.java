@@ -15,7 +15,11 @@ import static com.oop.backend.model.Logger.logger;
 
 @Service
 public class TicketPoolService {
-    private final Lock lock = new ReentrantLock(); // Lock for thread safety
+    /**
+     * Lock for thread safety
+     * Reference: https://www.geeksforgeeks.org/reentrant-lock-java/
+     */
+    private final Lock lock = new ReentrantLock();
     @Autowired
     private TicketPoolRepo ticketPoolRepository;
     @Autowired
