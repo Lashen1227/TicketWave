@@ -1,6 +1,6 @@
 # TicketWave - Backend
 
-The **TicketWave - Backend** is a robust backend system developed using **Spring Boot** and **MySQL** with OOP principals. It provides core functionality to manage configurations, users, and simulate operations for a real-time ticketing system. The backend is designed with scalability and modularity in mind, leveraging the capabilities of Spring Framework and a relational database for persistent data storage.
+The **TicketWave - Backend** is a robust backend system developed using **Spring Boot** and **MySQL** with Object-Oriented Programming (OOP) principals. It provides core functionality to manage configurations, users, and simulate operations for a real-time ticketing system. The backend is designed with scalability and modularity in mind, leveraging the capabilities of Spring Framework and a relational database for persistent data storage.
 
 ## Table of Contents
 
@@ -60,7 +60,7 @@ backend/
 │   │   │       ├── service/
 │   │   │       └── BackendApplication.java
 │   │   └── resources/
-│   │       └── application.properties
+│   │       └── application.yml
 │   └── test/
 │
 ├── pom.xml
@@ -73,9 +73,8 @@ backend/
 
 - **Spring Boot**: Framework for rapid development of Java applications.
 - **MySQL**: Relational database management system.
-- **JPA**: For ORM (Object-Relational Mapping).
-- **Lombok**: For reducing boilerplate code.
-- **Maven**: Build and dependency management tool.
+- **Spring Data JPA**: Data access abstraction for interacting with databases.
+- **Maven**: Build automation tool for managing dependencies and builds.
 
 ---
 
@@ -102,36 +101,30 @@ backend/
    ```
 
 3. **Configure Database Connection**  
-   Update the `application.yml` file under the `src/main/resources` directory with your MySQL credentials and replace `USERNAME` and `PASSWORD` with your MySQL credentials.:
-   ```properties
-   spring.datasource.url=jdbc:mysql://localhost:3306/oop_cw?createDatabaseIfNotExist=true
-   spring.datasource.username=USERNAME
-   spring.datasource.password=PASSWORD
-   spring.jpa.hibernate.ddl-auto=update
+   Update the `application.yml` file under the `src/main/resources` directory with your MySQL credentials and replace `USERNAME` and `PASSWORD` with your MySQL credentials. The database will be created automatically if it does not exist:
+   ```yaml
+    spring:
+      datasource:
+         url: jdbc:mysql://localhost:3306/oop_cw?createDatabaseIfNotExist=true
+         username: USERNAME
+         password: PASSWORD
    ```
 
 4. **Verify the Application**  
-   The backend will be accessible at `http://localhost:8080`.
+   Once the configuration is complete, the backend server will be accessible at http://localhost:8080 as specified in the application.yml file:
+   ``` yaml
+   server:
+     port: 8080
+   ```
 
 ---
 
 ## API Documentation
 
-### Endpoints
+Explore the comprehensive API documentation for the Event Ticketing System:
 
-Below are the key endpoints exposed by the backend:
-
-1. **Configuration API**
-    - `GET /api/configurations`: Retrieve all configurations.
-    - `POST /api/configurations`: Add a new configuration.
-    - `PUT /api/configurations/{id}`: Update an existing configuration.
-    - `DELETE /api/configurations/{id}`: Delete a configuration.
-
-
-2. **User API**
-    - `POST /api/users/register`: Register a new user.
-    - `POST /api/users/login`: Authenticate and log in a user.
-
+- **Swagger Documentation**: [TicketWave API](http://localhost:8080/swagger-ui/index.html)
+   
 ---
 
 ## License

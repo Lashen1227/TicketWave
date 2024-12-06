@@ -1,7 +1,7 @@
 # TicketWave - Command Line Interface
 
 
-TicketWave is a full-stack application with a Command Line Interface (CLI) component designed to manage configuration parameters, simulate event operations, and maintain system user data. Developed using core Object-Oriented Programming (OOP) principles, the application connects to a MySQL database for robust and persistent data storage. This project, created by [Lashen Martino](https://github.com/Lashen1227), as part of the OOP Module coursework at the University of Westminster.
+TicketWave is a full-stack application with a Command Line Interface (CLI) component designed to manage configuration parameters, simulate event operations, and maintain system user data. Developed using core Object-Oriented Programming (OOP) principles, the application connects to a MySQL database for robust and persistent data storage.
 
 ## Table of Contents
 - [Features](#features)
@@ -35,27 +35,17 @@ command_line_interface/
 ├── src/
 │   ├── main/
 │   │   ├── java/
-│   │   │   └── org/
-│   │   │       └── oop/
-│   │   │           ├── cli/
-│   │   │           │   └── ConfigCLI.java
-│   │   │           ├── config/
-│   │   │           │   └── DatabaseConfig.java
-│   │   │           ├── dao/
-│   │   │           │   └── AppUserDAO.java
-│   │   │           ├── model/
-│   │   │           │   ├── AppUser.java
-│   │   │           │   └── Configuration.java
-│   │   │           └── service/
-│   │   │               ├── ConfigurationService.java
-│   │   │               └── SimulationService.java
+│   │   │   └── org.oop/
+│   │   │       ├── cli/
+│   │   │       ├── config/
+│   │   │       ├── dao/
+│   │   │       ├── model/
+│   │   │       └── service/
 │   │   └── resources/
 │   └── test/
-├── target/
-├── .gitignore
+│
 ├── pom.xml
 └── README.md
-
 ```
 
 ---
@@ -83,13 +73,17 @@ command_line_interface/
    ```bash
    git clone https://github.com/Lashen1227/TicketWave.git
    ```
-
-2. **Import the Project in Your IDE**
+2. **Navigate to the Command Line Interface Folder**
+   ```bash
+   cd TicketWave/command_line_interface
+   ```
+   
+3. **Import the Project in Your IDE**
     - Open your preferred Java IDE (ex: IntelliJ IDEA, Eclipse, Visual Studio Code).
     - Import the project as a Maven project.
 
 
-3. **Configuring the MySQL Database**
+4. **Configuring the MySQL Database**
    - Update the database connection details in the `DatabaseConfig.java` file to reflect your MySQL setup:
    ```java
     private static final String URL = "jdbc:mysql://localhost:3306/";
