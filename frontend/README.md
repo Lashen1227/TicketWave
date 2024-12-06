@@ -1,50 +1,115 @@
-# React + TypeScript + Vite
+# TicketWave - Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+The **TicketWave - Frontend** is a modern and interactive client-side application built with **React** and **TypeScript**, enhanced by the use of **Material UI** for elegant and responsive UI components. This project serves as the front-end interface for the TicketWave system, providing users with features such as event browsing, ticket booking, and user management. It utilizes **Vite** for fast builds and hot module replacement, ensuring a seamless development experience.
 
-Currently, two official plugins are available:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+## Table of Contents
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- [TicketWave - Frontend](#ticketwave---frontend)
+  - [Table of Contents](#table-of-contents)
+  - [Overview](#overview)
+  - [Features](#features)
+  - [Technologies Used](#technologies-used)
+  - [Installation and Setup](#installation-and-setup)
+    - [Prerequisites](#prerequisites)
+    - [Setup Instructions](#setup-instructions)
+  - [Available Scripts](#available-scripts)
+  - [License](#license)
 
-- Configure the top-level `parserOptions` property like this:
+---
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+## Overview
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+The TicketWave - Frontend is designed to deliver an intuitive and responsive user experience for the TicketWave system. It integrates with the backend via RESTful APIs, offering a streamlined workflow for users to explore events, manage bookings, and access personalized features.
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+---
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+## Features
+
+
+1. **User Authentication**  
+   Includes user login, registration, and session management.
+
+2. **Event Browsing**  
+   Allows users to view and search for events with detailed descriptions.
+
+3. **Ticket Booking**  
+   Enables seamless ticket booking with validation and error handling.
+
+4. **Responsive Design**  
+   Ensures compatibility across devices for a consistent user experience.
+
+5. **Type Safety**  
+   Built with TypeScript to enhance code quality and maintainability.
+
+
+---
+
+## Technologies Used
+
+- **React**: A library for building user interfaces.
+- **TypeScript**: For static type checking and better code maintainability.
+- **Vite**: A fast build tool for modern front-end projects.
+- **Axios**: For HTTP requests and API integration.
+- **React Router**: For handling client-side routing.
+- **Material UI**: Customizable React components for responsive, modern interfaces.
+
+---
+
+## Installation and Setup
+
+### Prerequisites
+
+- **Node.js (v18 or higher)**  
+  Install Node.js from [Node.js Official Website](https://nodejs.org/).
+
+- **Package Manager**  
+  Either `npm` (comes with Node.js) or `yarn`.
+
+### Setup Instructions
+
+1. **Clone the Repository**  
+   Clone the TicketWave repository from GitHub:
+   ```bash
+   git clone https://github.com/Lashen1227/TicketWave.git
+   ```
+
+2. **Navigate to the Frontend Folder**  
+   ```bash
+   cd TicketWave/frontend
+   ```
+
+3. **Install Dependencies**  
+   Install all required dependencies using the package manager of your choice:
+   ```bash
+   npm install
+   # or
+   yarn install
+   ```
+
+4. **Start the Development Server**  
+   Run the development server:
+   ```bash
+   npm run dev
+   # or
+   yarn dev
+   ```
+
+
+---
+
+## Available Scripts
+
+- **`npm run dev`**: Starts the development server with hot module replacement.
+- **`npm run build`**: Builds the application for production.
+- **`npm run preview`**: Serves the production build locally for testing.
+- **`npm run lint`**: Runs linting checks on the codebase.
+
+---
+
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).
