@@ -7,7 +7,6 @@
 ## Table of Contents
 
 - [Overview](#overview)
-- [Features](#features)
 - [Technologies Used](#technologies-used)
 - [System Architecture](#system-architecture)
 - [Prerequisites](#prerequisites)
@@ -21,17 +20,7 @@
 
 This project was developed by [Lashen Martino](https://github.com/Lashen1227) as part of the **Object-Oriented Programming (OOP) module coursework** at the **University of Westminster**.
 
-**TicketWave** simulates a real-time ticketing environment where event organizers release tickets (producers) while customers purchase them (consumers). The system uses advanced concurrency handling techniques to manage transactions efficiently and accurately, ensuring a smooth user experience.
-
----
-
-## Features
-
-1. **Real-Time Ticket Management**
-2. **User Authentication**
-3. **Event Management**
-4. **Responsive Frontend**
-5. **Database Integration**
+**TicketWave** simulates a real-time ticketing environment where vendors release tickets (producers) while customers purchase them (consumers). The system uses advanced concurrency handling techniques to manage transactions efficiently and accurately, ensuring a smooth user experience.
 
 ---
 
@@ -88,4 +77,5 @@ This project is licensed under the [MIT License](LICENSE).
 
 ## Preview
 
-![TicketWave](https://github.com/user-attachments/assets/44cd04f4-19da-46c0-8ec9-d1b0a56801dd)
+![TicketWave Home](https://github.com/user-attachments/assets/e6cfc209-c3e7-4530-9911-1611f25e11c7)
+
