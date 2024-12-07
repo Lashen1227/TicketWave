@@ -8,6 +8,7 @@ interface ThemeContextType {
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
+// Custom hook to use the theme context
 export const useThemeContext = () => {
     const context = useContext(ThemeContext);
     if (!context) {
@@ -20,6 +21,7 @@ interface ThemeContextProviderProps {
     children: React.ReactNode;
 }
 
+// Custom ThemeProvider to manage the theme of the application
 export const ThemeContextProvider: React.FC<ThemeContextProviderProps> = ({ children }) => {
     const getSystemTheme = () => {
         if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
@@ -28,12 +30,14 @@ export const ThemeContextProvider: React.FC<ThemeContextProviderProps> = ({ chil
         return 'light';
     };
 
+    // Initialize the theme based on the system theme
     const [mode, setMode] = useState<'dark' | 'light'>(getSystemTheme());
 
     const toggleTheme = () => {
         setMode((prevMode) => (prevMode === 'light' ? 'dark' : 'light'));
     };
 
+    // Create a custom theme based on the mode
     const theme = useMemo(() => createTheme({
         shape: {
             borderRadius: 12,

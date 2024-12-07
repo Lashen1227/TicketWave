@@ -30,6 +30,13 @@ const EventCard: React.FC<EventCardProps> = ({ event, onClick }) => {
           image={event.image ?? 'https://www.svgrepo.com/show/508699/landscape-placeholder.svg'}
           alt="green iguana"
         />
+        {/* CardMedia Component - A MUI component for displaying media (images, videos) in a Card.
+        Supports background images (`image`) or inline media (`src`).
+        Customizable via `sx`, `classes`, and the `component` prop for overriding the root element.
+        References:
+          Demos: https://mui.com/material-ui/react-card/
+          API: https://mui.com/material-ui/api/card-media/ */}
+
         <CardContent sx={{
           position: 'absolute',
           bottom: 0,

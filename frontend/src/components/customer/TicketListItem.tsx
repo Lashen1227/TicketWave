@@ -2,6 +2,7 @@ import React from 'react';
 import { ListItemButton, ListItemAvatar, Avatar, ListItemText } from '@mui/material';
 import { TicketDTO } from '../../types/Ticket';
 
+// component to display a ticket list item
 interface TicketListItemProps {
   ticket: TicketDTO;
   onClick: (eventId: number) => void;
