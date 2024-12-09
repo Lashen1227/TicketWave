@@ -9,8 +9,9 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
 import { Event } from '../../types/Event';
 import { TransitionProps } from '@mui/material/transitions';
-import { alpha, Grow, TextField, Box, Typography, CircularProgress } from '@mui/material';
+import { alpha, Grow, TextField, Box, Typography, CircularProgress, Card } from '@mui/material';
 import { releaseTickets } from '../../services/vendorApi';
+import { useWebSocket } from '../../hooks/useWebSocket';
 
 interface EventEditorProps {
     open: boolean;
@@ -44,6 +45,7 @@ const EventEditor: React.FC<EventEditorProps> = ({ open, onClose, event, onSave,
     const [image, setImage] = useState('');
     const [ticketCount, setTicketCount] = useState<number>(1);
     const [loading, setLoading] = useState<boolean>(false);
+    const { purchases, socket } = useWebSocket(event?.id || null);
 
     const [errors, setErrors] = useState({
         eventName: '',
@@ -260,34 +262,56 @@ const EventEditor: React.FC<EventEditorProps> = ({ open, onClose, event, onSave,
                     helperText={errors.image}
                 />
                 {event && (
-                    <Box sx={{ marginTop: 2 }}>
-                        <Typography variant="h6">Release New Tickets</Typography>
-                        <Box sx={{
-                            display: 'flex',
-                            flexDirection: 'rows',
-                            gap: '0.5rem',
-                            alignItems: 'center',
-                        }}>
-                            <TextField
-                                margin="normal"
-                                fullWidth
-                                id="ticketCount"
-                                label="Number of Tickets"
-                                name="ticketCount"
-                                type="number"
-                                value={ticketCount}
-                                onChange={(e) => setTicketCount(parseInt(e.target.value))}
-                            />
-                            <Typography variant="body2" color="textSecondary" sx={{
-                                marginLeft: '1rem',
+                    <>
+                        <Box sx={{ marginTop: 2 }}>
+                            <Typography variant="h6">Release New Tickets</Typography>
+                            <Box sx={{
+                                display: 'flex',
+                                flexDirection: 'rows',
+                                gap: '0.5rem',
+                                alignItems: 'center',
                             }}>
-                                Available: {event.availableTickets}
-                            </Typography>
+                                <TextField
+                                    margin="normal"
+                                    fullWidth
+                                    id="ticketCount"
+                                    label="Number of Tickets"
+                                    name="ticketCount"
+                                    type="number"
+                                    value={ticketCount}
+                                    onChange={(e) => setTicketCount(parseInt(e.target.value))}
+                                />
+                                <Typography variant="body2" color="textSecondary" sx={{
+                                    marginLeft: '1rem',
+                                }}>
+                                    Available: {event.availableTickets}
+                                </Typography>
+                            </Box>
+                            <Button variant="contained" onClick={handleReleaseTickets} disabled={loading}>
+                                {loading ? <CircularProgress size={24} /> : 'Release Tickets'}
+                            </Button>
                         </Box>
-                        <Button variant="contained" onClick={handleReleaseTickets} disabled={loading}>
-                            {loading ? <CircularProgress size={24} /> : 'Release Tickets'}
-                        </Button>
-                    </Box>
+                        <Box sx={{ marginTop: 4 }}>
+                            <Typography variant="h6" sx={{ textAlign: 'center', marginY: '2rem' }}>
+                                Real-Time Ticket Purchases Log
+                            </Typography>
+                            <Box sx={{ overflowY: 'scroll', height: '60vh', padding: '1rem' }}>
+                                {purchases.map((purchase, index) => (
+                                    <Card key={index} sx={{ marginBottom: '1rem', padding: '1rem' }}>
+                                        🎫 {purchase}
+                                    </Card>
+                                ))}
+                                <Card sx={{
+                                    marginBottom: '1rem',
+                                    padding: '1rem',
+                                    flexGrow: 1,
+                                    backgroundColor: 'background.default',
+                                }} variant='outlined'>
+                                    Connection status: {socket?.readyState === WebSocket.OPEN ? '🟢' : '🔴'} Ticket purchasing information will be displayed here in real-time.
+                                </Card>
+                            </Box>
+                        </Box>
+                    </>
                 )}
             </DialogContent>
             <DialogActions>
