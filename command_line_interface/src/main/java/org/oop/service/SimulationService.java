@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class SimulationService {
     // AtomicBoolean to check if simulation is running and Available tickets count
@@ -13,6 +15,7 @@ public class SimulationService {
     // List to store all threads
     private final List<Thread> threads = new ArrayList<>();
 
+    private static final Logger logger = Logger.getLogger(SimulationService.class.getName());
     public static final String Reset = "\u001B[0m";
     public static final String Red = "\u001B[31m";
     public static final String Green = "\u001B[32m";
@@ -27,11 +30,11 @@ public class SimulationService {
         int customerCount = scanner.nextInt();
 
         if (vendorCount <= 0 || customerCount <= 0) {
-            System.out.println(Red  +"Vendors and customers count must be greater than 0. Please try again."  + Reset);
+            logger.info(Red  +"Vendors and customers count must be greater than 0. Please try again."  + Reset);
             return;
         }
         if (running.get()) {
-            System.out.println(Red + "Simulation already running. Please stop the current simulation first." + Reset);
+            logger.info(Red + "Simulation already running. Please stop the current simulation first." + Reset);
             return;
         }
         running.set(true);
@@ -104,7 +107,7 @@ public class SimulationService {
      */
     private synchronized void addTickets(int count, int vendorId) {
         availableTickets.addAndGet(count);
-        System.out.println(Magenta + "[Thread " + Thread.currentThread().getId() + "]  Vendor-" + vendorId
+        logger.info(Magenta + "[Thread " + Thread.currentThread().getId() + "]  Vendor-" + vendorId
                 + " added " + count + " ticket. Available tickets: " + availableTickets.get() + Reset);
     }
 
@@ -116,10 +119,10 @@ public class SimulationService {
     private synchronized void buyTickets(int count, int customerId) {
         if (availableTickets.get() >= count) {
             availableTickets.addAndGet(-count);
-            System.out.println(Green + "[Thread " + Thread.currentThread().getId() + "]  Customer-" + customerId
+            logger.info(Green + "[Thread " + Thread.currentThread().getId() + "]  Customer-" + customerId
                     + " bought " + count + " ticket. Remaining tickets: " + availableTickets.get() + Reset);
         } else {
-            System.out.println(Yellow + "[Thread " + Thread.currentThread().getId() + "]  Customer-" + customerId
+            logger.info(Yellow + "[Thread " + Thread.currentThread().getId() + "]  Customer-" + customerId
                     + " tried to buy " + count + " ticket(s), but not enough tickets are available." + Reset);
         }
     }

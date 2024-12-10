@@ -6,6 +6,5 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class Logger {
-    // ANSI Color Codes for loggers
     public static final org.slf4j.Logger logger = LoggerFactory.getLogger(Logger.class);
 }
