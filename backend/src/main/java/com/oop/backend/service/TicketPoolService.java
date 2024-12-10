@@ -49,7 +49,7 @@ public class TicketPoolService {
                     ticket.sellTicket();
                     ticket.setCustomer(customer);
                     ticketService.saveTicket(ticket);
-                    logger.info(Green + customer.getName() + " - Ticket " + ticket.getId() + " purchased for " + ticketPool.getEventName() + Reset);
+                    logger.info(Green + customer.getName() + " - Ticket ID " + ticket.getId() + " purchased for " + ticketPool.getEventName() + Reset);
                 } else {
                     logger.info(Yellow + "No tickets available for the event: " + ticketPool.getEventName() + Reset);
                 }

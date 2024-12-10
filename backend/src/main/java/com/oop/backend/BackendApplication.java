@@ -6,9 +6,11 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-@OpenAPIDefinition(info = @Info(title = "TicketWave", version = "1.0", description = "Event Ticketing System developed as part of the OOP module coursework at the University of Westminster."))
+@OpenAPIDefinition(info = @Info(title = "TicketWave", version = "1.0", description = "TicketWave API Documentation."))
+
 public class BackendApplication {
 	public static final String Reset = "\u001B[0m";
+	public static final String Red = "\u001B[31m";
 	public static final String Green = "\u001B[32m";
 	public static final String Yellow = "\u001B[33m";
 	public static final String Magenta = "\u001B[35m";
