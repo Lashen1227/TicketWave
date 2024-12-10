@@ -55,6 +55,7 @@ The TicketWave - Frontend is designed to deliver an intuitive and responsive use
 - **Axios**: For HTTP requests and API integration.
 - **React Router**: For handling client-side routing.
 - **Material UI**: Customizable React components for responsive, modern interfaces.
+- **WebSockets**: Enables real-time updates for ticket availability and status.
 
 ---
 
