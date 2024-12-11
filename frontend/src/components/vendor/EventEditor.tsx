@@ -9,9 +9,9 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
 import { Event } from '../../types/Event';
 import { TransitionProps } from '@mui/material/transitions';
-import { alpha, Grow, TextField, Box, Typography, CircularProgress, Card } from '@mui/material';
+import { alpha, Grow, TextField, Box, Typography, CircularProgress } from '@mui/material';
 import { releaseTickets } from '../../services/vendorApi';
-import { useWebSocket } from '../../hooks/useWebSocket';
+import Loader from '../Loader';
 
 interface EventEditorProps {
     open: boolean;
@@ -45,8 +45,7 @@ const EventEditor: React.FC<EventEditorProps> = ({ open, onClose, event, onSave,
     const [image, setImage] = useState('');
     const [ticketCount, setTicketCount] = useState<number>(1);
     const [loading, setLoading] = useState<boolean>(false);
-    const { purchases, socket } = useWebSocket(event?.id || null);
-
+    
     const [errors, setErrors] = useState({
         eventName: '',
         eventLocation: '',
@@ -292,24 +291,7 @@ const EventEditor: React.FC<EventEditorProps> = ({ open, onClose, event, onSave,
                             </Button>
                         </Box>
                         <Box sx={{ marginTop: 4 }}>
-                            <Typography variant="h6" sx={{ textAlign: 'center', marginY: '2rem' }}>
-                                Real-Time Ticket Purchases Log
-                            </Typography>
-                            <Box sx={{ overflowY: 'scroll', height: '60vh', padding: '1rem' }}>
-                                {purchases.map((purchase, index) => (
-                                    <Card key={index} sx={{ marginBottom: '1rem', padding: '1rem' }}>
-                                        🎫 {purchase}
-                                    </Card>
-                                ))}
-                                <Card sx={{
-                                    marginBottom: '1rem',
-                                    padding: '1rem',
-                                    flexGrow: 1,
-                                    backgroundColor: 'background.default',
-                                }} variant='outlined'>
-                                    Connection status: {socket?.readyState === WebSocket.OPEN ? '🟢' : '🔴'} Ticket purchasing information will be displayed here in real-time.
-                                </Card>
-                            </Box>
+                            <Loader eventId={1}/>
                         </Box>
                     </>
                 )}

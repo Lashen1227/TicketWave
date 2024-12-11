@@ -87,6 +87,7 @@ backend/
 - **Java Development Kit (JDK 17 or higher)**
 - **MySQL Server**
 - **IDE (IntelliJ IDEA, Eclipse, etc.)**
+- **Spring WebSocket Plugin**
 - **Postman (Optional)**
 
 ### Setup Instructions
