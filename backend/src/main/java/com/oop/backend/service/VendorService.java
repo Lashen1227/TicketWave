@@ -1,5 +1,6 @@
 package com.oop.backend.service;
 
+import com.oop.backend.handler.LogWebSocketHandler;
 import com.oop.backend.model.EventItem;
 import com.oop.backend.model.Ticket;
 import com.oop.backend.model.TicketPool;
@@ -35,6 +36,8 @@ public class VendorService {
     private TicketPoolRepo ticketPoolRepository;
     @Autowired
     private UserService userService;
+    @Autowired
+    private LogWebSocketHandler logWebSocketHandler;
 
     @Transactional
     public Vendor createVendor(Vendor vendor) {
@@ -57,15 +60,23 @@ public class VendorService {
                     ticketRepository.save(ticket);
                     ticketPoolService.addTicket(ticketPool, ticket);
                     ticketPoolRepository.save(ticketPool);
-                    logger.info(Magenta + vendor.getName() + " - Released ticket: " + ticket.getId() + " for: " + eventItem.getName() + Reset);
+
+                    String logMessage = vendor.getName() + " - Released ticket ID " + ticket.getId() + " for: " + eventItem.getName();
+                    logger.info(Magenta+ logMessage + Reset);
+                    // Send log message to WebSocket clients
+                    logWebSocketHandler.broadcast(logMessage);
+
                 } else {
-                    logger.info(Yellow + vendor.getName() + " - Ticket pool is full for: " + eventItem.getName() + Reset);
+                    String logFullMessage = vendor.getName() + " - Ticket pool is full for: " + eventItem.getName();
+                    logger.info(Yellow + logFullMessage + Reset);
+                    logWebSocketHandler.broadcast(logFullMessage);
                 }
             } else {
-                logger.info("Ticket pool not found");
+                String logPoolErrorMessage = "Ticket pool not found";
+                logger.info(Red + logPoolErrorMessage + Reset);
             }
         } else {
-            logger.info("Event not found");
+            logger.info(Red + "Event not found" + Reset);
         }
     }
 

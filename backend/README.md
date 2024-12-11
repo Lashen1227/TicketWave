@@ -55,6 +55,7 @@ backend/
 │   │   │       ├── config/
 │   │   │       ├── controller/
 │   │   │       ├── dto/
+│   │   │       ├── handler/
 │   │   │       ├── model/
 │   │   │       ├── repo/
 │   │   │       ├── service/
@@ -74,6 +75,7 @@ backend/
 - **Spring Boot**: Framework for rapid development of Java applications.
 - **MySQL**: Relational database management system.
 - **Spring Data JPA**: Data access abstraction for interacting with databases.
+- **WebSockets**: Enables real-time, bidirectional communication between the server and client.
 - **Maven**: Build automation tool for managing dependencies and builds.
 
 ---
