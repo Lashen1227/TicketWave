@@ -11,7 +11,6 @@ import { useTheme } from '@mui/material/styles';
 import { Event } from '../../types/Event';
 import { TransitionProps } from '@mui/material/transitions';
 import { alpha, Box, Grow, CircularProgress } from '@mui/material';
-import BookmarkAddRoundedIcon from '@mui/icons-material/Bookmark';
 import { purchaseTicket } from '../../services/customerApi';
 
 interface EventDetailsProps {
@@ -167,9 +166,6 @@ const EventDetails: React.FC<EventDetailsProps> = ({ open, onClose, event, isSig
                             </Button>
                             {isSignedIn ? (
                                 <>
-                                    <Button variant="outlined" endIcon={<BookmarkAddRoundedIcon />}>
-                                        Bookmark
-                                    </Button>
                                     <Button 
                                         variant="contained" 
                                         onClick={buyTicket} 
