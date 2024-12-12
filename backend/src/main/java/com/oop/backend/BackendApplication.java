@@ -6,7 +6,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-@OpenAPIDefinition(info = @Info(title = "TicketWave", version = "1.0", description = "TicketWave API Documentation."))
+@OpenAPIDefinition(info = @Info(title = "TicketWave - API Documentation", version = "1.0", description = "Real-Time Event Ticketing System."))
 
 public class BackendApplication {
 	public static final String Reset = "\u001B[0m";
@@ -22,3 +22,5 @@ public class BackendApplication {
 		System.out.println(Blue + "System Processing..." + Reset);
 	}
 }
+
+// API Documentation: http://localhost:8080/swagger-ui/index.html
